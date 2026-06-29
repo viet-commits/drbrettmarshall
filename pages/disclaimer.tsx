@@ -1,27 +1,20 @@
 import Head from "next/head";
-import { pages } from "../data/content";
 
 export default function Disclaimer() {
-  const page = (pages as Record<string, any>)["disclaimer"];
-  if (!page) return null;
-
   return (
     <>
-      <Head>
-        <title>Disclaimer — Dr Brett Marshall</title>
-        <meta name="description" content={page.meta} />
-      </Head>
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <header className="mb-10">
-          <h1 className="text-3xl font-light text-[#1a3a4a]">{page.title}</h1>
-          <div className="w-12 h-[2px] bg-[#1a3a4a] mt-3" />
-        </header>
-        <div
-          className="prose prose-lg max-w-none prose-headings:text-[#1a3a4a] prose-a:text-[#1a3a4a] prose-img:rounded-lg prose-p:text-gray-600 prose-li:text-gray-600"
-          dangerouslySetInnerHTML={{ __html: page.content }}
-        />
-        <div className="mt-12 pt-6 border-t">
-          <a href="/" className="text-[#1a3a4a] hover:underline text-sm">← Back to Home</a>
+      <Head><title>Disclaimer — Dr Brett Marshall</title></Head>
+      <div className="bg-gray-50 border-b"><div className="max-w-[1200px] mx-auto px-4 py-8"><h1 className="text-2xl font-light text-[#1a3a4a]">Disclaimer</h1><div className="text-xs text-gray-400 mt-1"><a href="/" className="hover:text-[#1a3a4a]">Home</a> / Disclaimer</div></div></div>
+      <div className="max-w-[1200px] mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="lg:col-span-2"><div className="text-sm leading-relaxed text-gray-600 space-y-4">
+            <p className="font-semibold text-[#1a3a4a]">drbrettmarshall.com.au</p>
+            <p>All information contained on this website is intended for informational and educational purposes. The information is not intended nor suited to be a replacement or substitute for professional medical treatment or for professional medical advice relative to a specific medical question or condition.</p>
+            <p>We urge you to always seek the advice of your physician or medical professional with respect to your medical condition or questions. As a recipient of information from this website, you are not establishing a doctor/patient relationship with any physician.</p>
+            <p>Whilst we have made every attempt to ensure that the information contained in this site has been obtained from reliable sources, Dr Brett Marshall is not responsible for any errors or omissions, or for the results obtained from the use of this information.</p>
+            <p>All information in this site is provided &quot;as is&quot;, with no guarantee of completeness, accuracy, timeliness or of the results obtained from the use of this information, and without warranty of any kind, express or implied.</p>
+          </div></div>
+          <aside className="lg:col-span-1"><div className="sticky top-24"><div className="bg-[#1a3a4a] text-white p-6 rounded-sm"><h3 className="font-semibold text-sm uppercase tracking-wider mb-3">Contact Us</h3><p className="text-sm text-white/80 mb-4">Suite 3, 7 Foot Street, Frankston VIC 3199</p><a href="tel:+613****6411" className="block text-center bg-white text-[#1a3a4a] px-4 py-2.5 rounded-sm text-sm font-semibold hover:bg-gray-100 transition-colors">03 9776 6411</a></div></div></aside>
         </div>
       </div>
     </>

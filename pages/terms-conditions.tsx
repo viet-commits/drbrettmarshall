@@ -1,27 +1,27 @@
 import Head from "next/head";
-import { pages } from "../data/content";
 
 export default function TermsConditions() {
-  const page = (pages as Record<string, any>)["terms-conditions"];
-  if (!page) return null;
-
   return (
     <>
-      <Head>
-        <title>Terms & Conditions — Dr Brett Marshall</title>
-        <meta name="description" content={page.meta} />
-      </Head>
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <header className="mb-10">
-          <h1 className="text-3xl font-light text-[#1a3a4a]">{page.title}</h1>
-          <div className="w-12 h-[2px] bg-[#1a3a4a] mt-3" />
-        </header>
-        <div
-          className="prose prose-lg max-w-none prose-headings:text-[#1a3a4a] prose-a:text-[#1a3a4a] prose-img:rounded-lg prose-p:text-gray-600 prose-li:text-gray-600"
-          dangerouslySetInnerHTML={{ __html: page.content }}
-        />
-        <div className="mt-12 pt-6 border-t">
-          <a href="/" className="text-[#1a3a4a] hover:underline text-sm">← Back to Home</a>
+      <Head><title>Terms & Conditions — Dr Brett Marshall</title></Head>
+      <div className="bg-gray-50 border-b"><div className="max-w-[1200px] mx-auto px-4 py-8"><h1 className="text-2xl font-light text-[#1a3a4a]">Terms & Conditions</h1><div className="text-xs text-gray-400 mt-1"><a href="/" className="hover:text-[#1a3a4a]">Home</a> / Terms & Conditions</div></div></div>
+      <div className="max-w-[1200px] mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="lg:col-span-2"><div className="text-sm leading-relaxed text-gray-600 space-y-4">
+            <h2 className="text-lg font-semibold text-[#1a3a4a]">1. General Provisions</h2>
+            <p>These Terms of Use constitute an agreement made by and between Dr Brett Marshall and you. This agreement contains the terms and conditions that govern your use of this website.</p>
+            <p>By accessing, visiting, browsing, using or attempting to interact with any part of this website, you agree that you have read, understand and agree to be bound by these terms and conditions.</p>
+            <h2 className="text-lg font-semibold text-[#1a3a4a] !mt-8">2. Medical Disclaimer</h2>
+            <p>All information contained on this website is intended for informational and educational purposes only. The information is not intended nor suited to be a replacement or substitute for professional medical treatment or for professional medical advice relative to a specific medical question or condition.</p>
+            <p>We urge you to always seek the advice of your physician or medical professional with respect to your medical condition or questions.</p>
+            <h2 className="text-lg font-semibold text-[#1a3a4a] !mt-8">3. Privacy</h2>
+            <p>We take our obligations under the Victorian Health Records Act 2001 and the Commonwealth Privacy Act 1988 seriously. See our <a href="/privacy-policy" className="text-[#1a3a4a] hover:underline">Privacy Policy</a>.</p>
+            <h2 className="text-lg font-semibold text-[#1a3a4a] !mt-8">4. Intellectual Property</h2>
+            <p>All content on this site is the property of Dr Brett Marshall and is protected by Australian and international copyright laws.</p>
+            <h2 className="text-lg font-semibold text-[#1a3a4a] !mt-8">5. Limitation of Liability</h2>
+            <p>Dr Brett Marshall shall not be liable for any damages whatsoever arising out of the use of, or inability to use, this website.</p>
+          </div></div>
+          <aside className="lg:col-span-1"><div className="sticky top-24"><div className="bg-[#1a3a4a] text-white p-6 rounded-sm"><h3 className="font-semibold text-sm uppercase tracking-wider mb-3">Contact Us</h3><p className="text-sm text-white/80 mb-4">Suite 3, 7 Foot Street, Frankston VIC 3199</p><a href="tel:+613****6411" className="block text-center bg-white text-[#1a3a4a] px-4 py-2.5 rounded-sm text-sm font-semibold hover:bg-gray-100 transition-colors">03 9776 6411</a></div></div></aside>
         </div>
       </div>
     </>
