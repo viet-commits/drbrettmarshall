@@ -10,9 +10,9 @@ export default function ContactPage() {
 
       <div className="bg-gray-50 border-b">
         <div className="max-w-[1200px] mx-auto px-4 py-8">
-          <h1 className="text-2xl font-light text-[#1a3a4a]">Contact</h1>
+          <h1 className="text-[29px] font-semibold text-[#253d47]">Contact</h1>
           <div className="text-xs text-gray-400 mt-1">
-            <a href="/" className="hover:text-[#1a3a4a]">Home</a> / Contact
+            <a href="/" className="hover:text-[#253d47]">Home</a> / Contact
           </div>
         </div>
       </div>
@@ -21,37 +21,37 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Contact Details */}
           <div>
-            <h2 className="text-xl font-light text-[#1a3a4a] mb-6">Get In Touch</h2>
+            <h2 className="text-xl font-light text-[#253d47] mb-6">Get In Touch</h2>
 
             <div className="space-y-6 text-sm text-gray-600">
               <div className="flex gap-4">
-                <div className="text-[#1a3a4a] text-lg flex-shrink-0 mt-0.5">📍</div>
+                <div className="text-[#253d47] text-lg flex-shrink-0 mt-0.5">📍</div>
                 <div>
-                  <h3 className="font-semibold text-[#1a3a4a] mb-1">Address</h3>
+                  <h3 className="font-semibold text-[#253d47] mb-1">Address</h3>
                   <p>Suite 3, 7 Foot Street<br />Frankston VIC 3199</p>
                 </div>
               </div>
 
               <div className="flex gap-4">
-                <div className="text-[#1a3a4a] text-lg flex-shrink-0 mt-0.5">📞</div>
+                <div className="text-[#253d47] text-lg flex-shrink-0 mt-0.5">📞</div>
                 <div>
-                  <h3 className="font-semibold text-[#1a3a4a] mb-1">Phone</h3>
+                  <h3 className="font-semibold text-[#253d47] mb-1">Phone</h3>
                   <a href="tel:+613****6411" className="hover:underline">03 9776 6411</a>
                 </div>
               </div>
 
               <div className="flex gap-4">
-                <div className="text-[#1a3a4a] text-lg flex-shrink-0 mt-0.5">📠</div>
+                <div className="text-[#253d47] text-lg flex-shrink-0 mt-0.5">📠</div>
                 <div>
-                  <h3 className="font-semibold text-[#1a3a4a] mb-1">Fax</h3>
+                  <h3 className="font-semibold text-[#253d47] mb-1">Fax</h3>
                   <p>03 9776 6498</p>
                 </div>
               </div>
 
               <div className="flex gap-4">
-                <div className="text-[#1a3a4a] text-lg flex-shrink-0 mt-0.5">🏥</div>
+                <div className="text-[#253d47] text-lg flex-shrink-0 mt-0.5">🏥</div>
                 <div>
-                  <h3 className="font-semibold text-[#1a3a4a] mb-1">Operating At</h3>
+                  <h3 className="font-semibold text-[#253d47] mb-1">Operating At</h3>
                   <ul className="space-y-1">
                     <li>Peninsula Private Hospital, Langwarrin</li>
                     <li>Beleura Private Hospital, Mornington</li>
@@ -64,7 +64,7 @@ export default function ContactPage() {
             <div className="mt-10">
               <a
                 href="/request-an-appointment"
-                className="inline-block bg-[#1a3a4a] text-white px-8 py-3 rounded-sm font-semibold text-sm uppercase tracking-wider hover:bg-[#2a4a5a] transition-colors"
+                className="inline-block bg-[#253d47] text-white px-8 py-3 rounded-sm font-semibold text-sm uppercase tracking-wider hover:bg-[#2a4a5a] transition-colors"
               >
                 Request an Appointment
               </a>
@@ -81,7 +81,7 @@ export default function ContactPage() {
                 href="https://maps.google.com/?q=Suite+3+7+Foot+Street+Frankston+VIC+3199"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block mt-4 text-[#1a3a4a] text-sm hover:underline"
+                className="inline-block mt-4 text-[#253d47] text-sm hover:underline"
               >
                 Open in Google Maps →
               </a>

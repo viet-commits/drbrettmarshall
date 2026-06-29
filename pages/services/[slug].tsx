@@ -70,10 +70,10 @@ export default function ServicePage({ slug }: { slug: string }) {
       <div className="bg-gray-50 border-b">
         <div className="max-w-[1200px] mx-auto px-4 py-8">
           <nav className="text-xs text-gray-400 mb-2">
-            <a href="/" className="hover:text-[#1a3a4a]">Home</a> / <a href="/our-services" className="hover:text-[#1a3a4a]">Services</a> / <span className="text-[#1a3a4a]">{svc.title}</span>
+            <a href="/" className="hover:text-[#253d47]">Home</a> / <a href="/our-services" className="hover:text-[#253d47]">Services</a> / <span className="text-[#253d47]">{svc.title}</span>
           </nav>
-          <h1 className="text-2xl font-light text-[#1a3a4a]">{svc.title}</h1>
-          <div className="w-10 h-px bg-[#1a3a4a] mt-4" />
+          <h1 className="text-[29px] font-semibold text-[#253d47]">{svc.title}</h1>
+          <div className="w-10 h-px bg-[#253d47] mt-4" />
         </div>
       </div>
 
@@ -82,18 +82,18 @@ export default function ServicePage({ slug }: { slug: string }) {
           {/* Main Content */}
           <div className="lg:col-span-2">
             <section className="mb-12">
-              <h2 className="text-sm font-semibold text-[#1a3a4a] uppercase tracking-wide mb-4">Description</h2>
-              <div className="w-8 h-px bg-[#1a3a4a]/30 mb-6" />
-              <div className="text-sm leading-relaxed text-gray-600 space-y-4">
+              <h2 className="text-sm font-semibold text-[#253d47] uppercase tracking-wide mb-4">Description</h2>
+              <div className="w-8 h-px bg-[#253d47]/30 mb-6" />
+              <div className="text-lg leading-relaxed text-gray-800 space-y-4">
                 {descParas.map((p, i) => <p key={i}>{p}</p>)}
               </div>
             </section>
 
             {treatmentParas.length > 0 && (
               <section className="mb-12">
-                <h2 className="text-sm font-semibold text-[#1a3a4a] uppercase tracking-wide mb-4">Treatments and Procedures</h2>
-                <div className="w-8 h-px bg-[#1a3a4a]/30 mb-6" />
-                <div className="text-sm leading-relaxed text-gray-600 space-y-4">
+                <h2 className="text-sm font-semibold text-[#253d47] uppercase tracking-wide mb-4">Treatments and Procedures</h2>
+                <div className="w-8 h-px bg-[#253d47]/30 mb-6" />
+                <div className="text-lg leading-relaxed text-gray-800 space-y-4">
                   {treatmentParas.map((p, i) => <p key={i}>{p}</p>)}
                 </div>
               </section>
@@ -101,12 +101,12 @@ export default function ServicePage({ slug }: { slug: string }) {
 
             {relatedServices.length > 0 && (
               <section className="mb-12">
-                <h2 className="text-sm font-semibold text-[#1a3a4a] uppercase tracking-wide mb-4">Related Literature</h2>
-                <div className="w-8 h-px bg-[#1a3a4a]/30 mb-6" />
+                <h2 className="text-sm font-semibold text-[#253d47] uppercase tracking-wide mb-4">Related Literature</h2>
+                <div className="w-8 h-px bg-[#253d47]/30 mb-6" />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {relatedServices.map(([s, title]) => (
-                    <a key={s} href={`/services/${s}`} className="block bg-gray-50 border border-gray-100 rounded-sm p-4 hover:shadow-sm hover:border-[#1a3a4a]/30 transition-all group">
-                      <h3 className="font-medium text-[#1a3a4a] text-sm group-hover:underline">{title}</h3>
+                    <a key={s} href={`/services/${s}`} className="block bg-gray-50 border border-gray-100 rounded-sm p-4 hover:shadow-sm hover:border-[#253d47]/30 transition-all group">
+                      <h3 className="font-medium text-[#253d47] text-sm group-hover:underline">{title}</h3>
                       <span className="text-xs text-gray-400 mt-1 inline-block">Read More →</span>
                     </a>
                   ))}
@@ -118,10 +118,10 @@ export default function ServicePage({ slug }: { slug: string }) {
           {/* Sidebar */}
           <aside className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
-              <div className="bg-[#1a3a4a] text-white p-6 rounded-sm">
+              <div className="bg-[#253d47] text-white p-6 rounded-sm">
                 <h3 className="font-semibold text-sm uppercase tracking-wider mb-3">Request a Consultation</h3>
                 <p className="text-sm text-white/80 mb-4">Book an appointment with Dr Brett Marshall to discuss your health concerns.</p>
-                <a href="/request-an-appointment" className="block text-center bg-white text-[#1a3a4a] px-4 py-2.5 rounded-sm text-sm font-semibold hover:bg-gray-100 transition-colors">
+                <a href="/request-an-appointment" className="block text-center bg-white text-[#253d47] px-4 py-2.5 rounded-sm text-sm font-semibold hover:bg-gray-100 transition-colors">
                   Request Appointment
                 </a>
                 <div className="mt-4 pt-4 border-t border-white/20">
@@ -131,15 +131,15 @@ export default function ServicePage({ slug }: { slug: string }) {
               </div>
 
               <div className="bg-gray-50 border border-gray-100 rounded-sm p-6">
-                <h3 className="font-semibold text-[#1a3a4a] text-sm uppercase tracking-wider mb-4">All Services</h3>
+                <h3 className="font-semibold text-[#253d47] text-sm uppercase tracking-wider mb-4">All Services</h3>
                 <ul className="space-y-2">
                   {allServices.map(([s, title]) => (
                     <li key={s}>
-                      <a href={`/services/${s}`} className="text-sm text-gray-600 hover:text-[#1a3a4a] hover:underline">{title}</a>
+                      <a href={`/services/${s}`} className="text-sm text-gray-600 hover:text-[#253d47] hover:underline">{title}</a>
                     </li>
                   ))}
                 </ul>
-                <a href="/our-services" className="inline-block mt-4 text-xs text-[#1a3a4a] hover:underline font-semibold">
+                <a href="/our-services" className="inline-block mt-4 text-xs text-[#253d47] hover:underline font-semibold">
                   View All Services →
                 </a>
               </div>

@@ -27,8 +27,8 @@ export default function ForDoctors() {
 
       <div className="bg-gray-50 border-b">
         <div className="max-w-[1200px] mx-auto px-4 py-8">
-          <h1 className="text-2xl font-light text-[#1a3a4a]">For Doctors</h1>
-          <div className="text-xs text-gray-400 mt-1"><a href="/" className="hover:text-[#1a3a4a]">Home</a> / For Doctors</div>
+          <h1 className="text-[29px] font-semibold text-[#253d47]">For Doctors</h1>
+          <div className="text-xs text-gray-400 mt-1"><a href="/" className="hover:text-[#253d47]">Home</a> / For Doctors</div>
         </div>
       </div>
 
@@ -38,7 +38,7 @@ export default function ForDoctors() {
             <button
               key={t.id}
               onClick={() => setTab(t.id)}
-              className={`px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-colors ${tab === t.id ? "text-[#1a3a4a] border-b-2 border-[#1a3a4a]" : "text-gray-400 hover:text-gray-600"}`}
+              className={`px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-colors ${tab === t.id ? "text-[#253d47] border-b-2 border-[#253d47]" : "text-gray-400 hover:text-gray-600"}`}
             >
               {t.label}
             </button>
@@ -53,7 +53,7 @@ export default function ForDoctors() {
                   <span className="text-4xl">🔬</span>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold text-[#1a3a4a] text-sm mb-1">{item.caption}</h3>
+                  <h3 className="font-semibold text-[#253d47] text-sm mb-1">{item.caption}</h3>
                   <p className="text-xs text-gray-500">{item.desc}</p>
                 </div>
               </div>
@@ -62,14 +62,14 @@ export default function ForDoctors() {
         ) : (
           <div className="text-center py-16">
             <p className="text-6xl mb-4">🎬</p>
-            <h3 className="text-lg font-light text-[#1a3a4a] mb-2">Video Gallery</h3>
+            <h3 className="text-lg font-light text-[#253d47] mb-2">Video Gallery</h3>
             <p className="text-sm text-gray-500 max-w-md mx-auto">Surgical procedure videos are available for referring doctors. Please contact the practice for access.</p>
-            <a href="/refer-a-patient" className="inline-block mt-6 bg-[#1a3a4a] text-white px-6 py-2.5 rounded-sm text-sm font-semibold hover:bg-[#2a4a5a] transition-colors">Refer a Patient</a>
+            <a href="/refer-a-patient" className="inline-block mt-6 bg-[#253d47] text-white px-6 py-2.5 rounded-sm text-sm font-semibold hover:bg-[#2a4a5a] transition-colors">Refer a Patient</a>
           </div>
         )}
 
         <div className="mt-16 text-center">
-          <a href="/refer-a-patient" className="inline-block bg-[#1a3a4a] text-white px-8 py-3 rounded-sm font-semibold text-sm uppercase tracking-wider hover:bg-[#2a4a5a] transition-colors">
+          <a href="/refer-a-patient" className="inline-block bg-[#253d47] text-white px-8 py-3 rounded-sm font-semibold text-sm uppercase tracking-wider hover:bg-[#2a4a5a] transition-colors">
             Refer a Patient Online
           </a>
         </div>

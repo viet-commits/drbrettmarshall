@@ -25,27 +25,27 @@ export default function PatientInformation() {
 
       <div className="bg-gray-50 border-b">
         <div className="max-w-[1200px] mx-auto px-4 py-8">
-          <h1 className="text-2xl font-light text-[#1a3a4a]">Patient Information</h1>
-          <div className="text-xs text-gray-400 mt-1"><a href="/" className="hover:text-[#1a3a4a]">Home</a> / Patient Information</div>
+          <h1 className="text-[29px] font-semibold text-[#253d47]">Patient Information</h1>
+          <div className="text-xs text-gray-400 mt-1"><a href="/" className="hover:text-[#253d47]">Home</a> / Patient Information</div>
         </div>
       </div>
 
       <div className="max-w-[1200px] mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {ctaCards.map((card) => (
-            <a key={card.href} href={card.href} className="block bg-white border border-gray-200 rounded-sm p-8 text-center hover:shadow-lg hover:border-[#1a3a4a]/30 transition-all group">
-              <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-[#1a3a4a]/5 flex items-center justify-center group-hover:bg-[#1a3a4a]/10 transition-colors">
-                <span className="text-[#1a3a4a] text-2xl font-light">+</span>
+            <a key={card.href} href={card.href} className="block bg-white border border-gray-200 rounded-sm p-8 text-center hover:shadow-lg hover:border-[#253d47]/30 transition-all group">
+              <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-[#253d47]/5 flex items-center justify-center group-hover:bg-[#253d47]/10 transition-colors">
+                <span className="text-[#253d47] text-2xl font-light">+</span>
               </div>
-              <h2 className="font-semibold text-[#1a3a4a] text-lg mb-3">{card.title}</h2>
+              <h2 className="font-semibold text-[#253d47] text-lg mb-3">{card.title}</h2>
               <p className="text-sm text-gray-500 leading-relaxed">{card.desc}</p>
             </a>
           ))}
         </div>
 
         <section>
-          <h2 className="text-2xl font-light text-[#1a3a4a] mb-2">Professional Associations and Memberships</h2>
-          <div className="w-10 h-px bg-[#1a3a4a] mb-10" />
+          <h2 className="text-[29px] font-semibold text-[#253d47] mb-2">Professional Associations and Memberships</h2>
+          <div className="w-10 h-px bg-[#253d47] mb-10" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {associations.map((assoc) => (
               <div key={assoc.name} className="flex items-center gap-4 p-4 bg-gray-50 rounded-sm border border-gray-100">

@@ -57,8 +57,8 @@ export default function AboutYourVisit() {
 
       <div className="bg-gray-50 border-b">
         <div className="max-w-[1200px] mx-auto px-4 py-8">
-          <h1 className="text-2xl font-light text-[#1a3a4a]">About Your Visit</h1>
-          <div className="text-xs text-gray-400 mt-1"><a href="/" className="hover:text-[#1a3a4a]">Home</a> / About Your Visit</div>
+          <h1 className="text-[29px] font-semibold text-[#253d47]">About Your Visit</h1>
+          <div className="text-xs text-gray-400 mt-1"><a href="/" className="hover:text-[#253d47]">Home</a> / About Your Visit</div>
         </div>
       </div>
 
@@ -68,9 +68,9 @@ export default function AboutYourVisit() {
             <div className="space-y-10">
               {sections.map((section, i) => (
                 <div key={i}>
-                  <h2 className="text-lg font-semibold text-[#1a3a4a] mb-1">{section.heading}</h2>
-                  <div className="w-8 h-px bg-[#1a3a4a]/30 mb-4" />
-                  <div className="text-sm leading-relaxed text-gray-600 space-y-3">
+                  <h2 className="text-lg font-semibold text-[#253d47] mb-1">{section.heading}</h2>
+                  <div className="w-8 h-px bg-[#253d47]/30 mb-4" />
+                  <div className="text-lg leading-relaxed text-gray-800 space-y-3">
                     {section.content.map((p, j) => <p key={j}>{p}</p>)}
                   </div>
                 </div>
@@ -80,18 +80,18 @@ export default function AboutYourVisit() {
 
           <aside className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
-              <div className="bg-[#1a3a4a] text-white p-6 rounded-sm">
+              <div className="bg-[#253d47] text-white p-6 rounded-sm">
                 <h3 className="font-semibold text-sm uppercase tracking-wider mb-3">Ready to Book?</h3>
                 <p className="text-sm text-white/80 mb-4">Contact our practice to schedule your appointment.</p>
-                <a href="tel:+613****6411" className="block text-center bg-white text-[#1a3a4a] px-4 py-2.5 rounded-sm text-sm font-semibold hover:bg-gray-100 transition-colors">Call 03 9776 6411</a>
+                <a href="tel:+613****6411" className="block text-center bg-white text-[#253d47] px-4 py-2.5 rounded-sm text-sm font-semibold hover:bg-gray-100 transition-colors">Call 03 9776 6411</a>
               </div>
               <div className="bg-gray-50 border border-gray-100 rounded-sm p-6">
-                <h3 className="font-semibold text-[#1a3a4a] text-sm uppercase tracking-wider mb-4">Quick Links</h3>
+                <h3 className="font-semibold text-[#253d47] text-sm uppercase tracking-wider mb-4">Quick Links</h3>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="/patient-forms" className="text-gray-600 hover:text-[#1a3a4a]">Patient Forms</a></li>
-                  <li><a href="/frequently-asked-questions-faq" className="text-gray-600 hover:text-[#1a3a4a]">FAQs</a></li>
-                  <li><a href="/contact" className="text-gray-600 hover:text-[#1a3a4a]">Contact & Location</a></li>
-                  <li><a href="/our-services" className="text-gray-600 hover:text-[#1a3a4a]">Our Services</a></li>
+                  <li><a href="/patient-forms" className="text-gray-600 hover:text-[#253d47]">Patient Forms</a></li>
+                  <li><a href="/frequently-asked-questions-faq" className="text-gray-600 hover:text-[#253d47]">FAQs</a></li>
+                  <li><a href="/contact" className="text-gray-600 hover:text-[#253d47]">Contact & Location</a></li>
+                  <li><a href="/our-services" className="text-gray-600 hover:text-[#253d47]">Our Services</a></li>
                 </ul>
               </div>
             </div>

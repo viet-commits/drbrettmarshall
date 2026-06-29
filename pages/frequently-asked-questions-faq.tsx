@@ -58,15 +58,15 @@ export default function FAQs() {
 
       <div className="bg-gray-50 border-b">
         <div className="max-w-[1200px] mx-auto px-4 py-8">
-          <h1 className="text-2xl font-light text-[#1a3a4a]">Frequently Asked Questions</h1>
-          <div className="text-xs text-gray-400 mt-1"><a href="/" className="hover:text-[#1a3a4a]">Home</a> / FAQs</div>
+          <h1 className="text-[29px] font-semibold text-[#253d47]">Frequently Asked Questions</h1>
+          <div className="text-xs text-gray-400 mt-1"><a href="/" className="hover:text-[#253d47]">Home</a> / FAQs</div>
         </div>
       </div>
 
       <div className="max-w-[1200px] mx-auto px-4 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
-            <h2 className="text-xl font-light text-[#1a3a4a] mb-8">Answers to some of our most common questions</h2>
+            <h2 className="text-xl font-light text-[#253d47] mb-8">Answers to some of our most common questions</h2>
 
             <div className="space-y-3">
               {faqs.map((faq, i) => (
@@ -75,13 +75,13 @@ export default function FAQs() {
                     onClick={() => setOpenIndex(openIndex === i ? null : i)}
                     className="w-full text-left px-6 py-4 flex items-start gap-4 hover:bg-gray-50 transition-colors"
                   >
-                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-[#1a3a4a] text-white flex items-center justify-center text-sm font-bold">A</span>
-                    <span className="font-medium text-[#1a3a4a] text-sm pt-1 flex-1">{faq.question}</span>
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-[#253d47] text-white flex items-center justify-center text-sm font-bold">A</span>
+                    <span className="font-medium text-[#253d47] text-sm pt-1 flex-1">{faq.question}</span>
                     <span className="flex-shrink-0 text-gray-400 text-lg pt-0.5">{openIndex === i ? "−" : "+"}</span>
                   </button>
                   {openIndex === i && (
                     <div className="px-6 pb-5">
-                      <div className="text-sm leading-relaxed text-gray-600 ml-12 space-y-2">
+                      <div className="text-lg leading-relaxed text-gray-800 ml-12 space-y-2">
                         {faq.answer.map((line, j) => (
                           <p key={j}>{line}</p>
                         ))}
@@ -95,18 +95,18 @@ export default function FAQs() {
 
           <aside className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
-              <div className="bg-[#1a3a4a] text-white p-6 rounded-sm">
+              <div className="bg-[#253d47] text-white p-6 rounded-sm">
                 <h3 className="font-semibold text-sm uppercase tracking-wider mb-3">Still Have Questions?</h3>
                 <p className="text-sm text-white/80 mb-4">Contact our practice directly — our staff are happy to help.</p>
-                <a href="tel:+613****6411" className="block text-center bg-white text-[#1a3a4a] px-4 py-2.5 rounded-sm text-sm font-semibold hover:bg-gray-100 transition-colors">Call 03 9776 6411</a>
+                <a href="tel:+613****6411" className="block text-center bg-white text-[#253d47] px-4 py-2.5 rounded-sm text-sm font-semibold hover:bg-gray-100 transition-colors">Call 03 9776 6411</a>
               </div>
               <div className="bg-gray-50 border border-gray-100 rounded-sm p-6">
-                <h3 className="font-semibold text-[#1a3a4a] text-sm uppercase tracking-wider mb-4">Quick Links</h3>
+                <h3 className="font-semibold text-[#253d47] text-sm uppercase tracking-wider mb-4">Quick Links</h3>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="/about-your-visit" className="text-gray-600 hover:text-[#1a3a4a]">About Your Visit</a></li>
-                  <li><a href="/request-an-appointment" className="text-gray-600 hover:text-[#1a3a4a]">Request Appointment</a></li>
-                  <li><a href="/patient-forms" className="text-gray-600 hover:text-[#1a3a4a]">Patient Forms</a></li>
-                  <li><a href="/contact" className="text-gray-600 hover:text-[#1a3a4a]">Contact</a></li>
+                  <li><a href="/about-your-visit" className="text-gray-600 hover:text-[#253d47]">About Your Visit</a></li>
+                  <li><a href="/request-an-appointment" className="text-gray-600 hover:text-[#253d47]">Request Appointment</a></li>
+                  <li><a href="/patient-forms" className="text-gray-600 hover:text-[#253d47]">Patient Forms</a></li>
+                  <li><a href="/contact" className="text-gray-600 hover:text-[#253d47]">Contact</a></li>
                 </ul>
               </div>
             </div>

@@ -47,13 +47,13 @@ export default function OurServices() {
 
       <div className="bg-gray-50 border-b">
         <div className="max-w-[1200px] mx-auto px-4 py-8">
-          <h1 className="text-2xl font-light text-[#1a3a4a]">Our Services</h1>
-          <div className="text-xs text-gray-400 mt-1"><a href="/" className="hover:text-[#1a3a4a]">Home</a> / Our Services</div>
+          <h1 className="text-[29px] font-semibold text-[#253d47]">Our Services</h1>
+          <div className="text-xs text-gray-400 mt-1"><a href="/" className="hover:text-[#253d47]">Home</a> / Our Services</div>
         </div>
       </div>
 
       <div className="max-w-[1200px] mx-auto px-4 py-12">
-        <div className="max-w-3xl text-sm leading-relaxed text-gray-600 space-y-4 mb-12">
+        <div className="max-w-3xl text-lg leading-relaxed text-gray-800 space-y-4 mb-12">
           <p>Please find below patient information on many of the procedures and surgeries that Dr Marshall commonly performs. Please remember that these are general notes and your particular procedure or surgery will be individualised according to your particular problems and circumstances. At your consultation he will discuss your procedure in detail and give you adequate time for questions. Dr Marshall will also supply you with detailed information sheets and recommended Royal Australian and New Zealand College of Obstetricians & Gynaecologists treatment information pamphlets, so that you are fully informed.</p>
           <p>When Dr Marshall&apos;s secretary, Marion, books you for any surgery, she will also go through some important checklists. Marion has worked with Brett for more than 20 years and has considerable experience in managing patient enquiries. She has a nursing background and understands the range of issues that may present. Marion will help you with any concerns or questions along the way.</p>
         </div>
@@ -61,13 +61,13 @@ export default function OurServices() {
         <div className="flex border-b mb-10">
           <button
             onClick={() => setTab("conditions")}
-            className={`px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-colors ${tab === "conditions" ? "text-[#1a3a4a] border-b-2 border-[#1a3a4a]" : "text-gray-400 hover:text-gray-600"}`}
+            className={`px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-colors ${tab === "conditions" ? "text-[#253d47] border-b-2 border-[#253d47]" : "text-gray-400 hover:text-gray-600"}`}
           >
             By Condition
           </button>
           <button
             onClick={() => setTab("procedures")}
-            className={`px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-colors ${tab === "procedures" ? "text-[#1a3a4a] border-b-2 border-[#1a3a4a]" : "text-gray-400 hover:text-gray-600"}`}
+            className={`px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-colors ${tab === "procedures" ? "text-[#253d47] border-b-2 border-[#253d47]" : "text-gray-400 hover:text-gray-600"}`}
           >
             By Procedure or Treatment
           </button>
@@ -75,10 +75,10 @@ export default function OurServices() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {display.map((svc) => (
-            <a key={svc.slug} href={`/services/${svc.slug}`} className="block bg-white border border-gray-100 rounded-sm p-6 hover:shadow-md hover:border-[#1a3a4a]/30 transition-all group">
-              <h3 className="font-semibold text-[#1a3a4a] text-base mb-3 group-hover:underline">{svc.title}</h3>
+            <a key={svc.slug} href={`/services/${svc.slug}`} className="block bg-white border border-gray-100 rounded-sm p-6 hover:shadow-md hover:border-[#253d47]/30 transition-all group">
+              <h3 className="font-semibold text-[#253d47] text-base mb-3 group-hover:underline">{svc.title}</h3>
               <p className="text-sm text-gray-500 leading-relaxed mb-4">{excerpt(svc.content)}</p>
-              <span className="text-xs font-semibold text-[#1a3a4a] uppercase tracking-wider">Read More →</span>
+              <span className="text-xs font-semibold text-[#253d47] uppercase tracking-wider">Read More →</span>
             </a>
           ))}
         </div>
