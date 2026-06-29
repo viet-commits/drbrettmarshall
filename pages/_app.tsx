@@ -3,6 +3,53 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
+import cleanContent from "../data/clean_content.json";
+
+const CONDITION_SLUGS = [
+  "abnormal-pap-smears-vulval-disorders","adhesions","endometriosis",
+  "fibroids","infertility","menorrhagia-heavy-periods","pcos",
+  "pelvic-organ-prolapse","pelvic-pain","urinary-incontinence"
+];
+
+function FooterLinks() {
+  const services = cleanContent.services as Record<string, { title: string }>;
+  const procedureSlugs = Object.keys(services).filter(s => !CONDITION_SLUGS.includes(s));
+  
+  const cols = [
+    { heading: "Site Links", links: [
+      ["About Dr Marshall","/about"],["Patient Information","/patient-information"],["Services","/our-services"],
+      ["Frequently Asked Questions","/frequently-asked-questions-faq"],["Contact Us","/contact"],
+      ["Disclaimer","/disclaimer"],["Privacy Policy","/privacy-policy"],
+    ]},
+    { heading: "For Patients", links: [
+      ["Patient Information & Forms","/patient-information"],["Operations and Conditions","/our-services"],
+      ["About your visit","/about-your-visit"],["New Patient Registration","/patient-forms/new-patient-form"],
+      ["Photo Gallery","/for-doctors"],
+    ]},
+    { heading: "For Doctors", links: [
+      ["Refer a Patient","/refer-a-patient"],["Photo Gallery","/for-doctors"],
+    ]},
+    { heading: "Conditions Treated", links: CONDITION_SLUGS.slice(0,8).map(s => [services[s]?.title || s, `/services/${s}`]) },
+    { heading: "Procedures", links: procedureSlugs.slice(0,8).map(s => [services[s]?.title || s, `/services/${s}`]) },
+  ];
+
+  return (
+    <div className="max-w-[1200px] mx-auto px-4 py-12">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+        {cols.map(col => (
+          <div key={col.heading}>
+            <h4 className="text-[#8bb2c4] text-lg font-semibold mb-4">{col.heading}</h4>
+            <ul className="space-y-1.5">
+              {col.links.map(([label, href]) => (
+                <li key={label}><a href={href} className="text-base text-white/90 hover:text-white hover:underline transition-colors">{label}</a></li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function App({ Component, pageProps }: AppProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -99,48 +146,11 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </main>
 
-        {/* Footer */}
-        <footer className="bg-[#101820] text-white mt-16">
-          <div className="max-w-[1200px] mx-auto px-4 py-14">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
-              <div>
-                <img src="/images/DBM_Logo-uai-258x72.png" alt="Dr Brett Marshall" className="h-12 w-auto mb-4 brightness-0 invert opacity-80" />
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  Specialist Obstetrician & Gynaecologist<br />
-                  Suite 3, 7 Foot Street, Frankston VIC 3199<br />
-                  <a href="tel:+613****6411" className="hover:text-white">03 9776 6411</a>
-                </p>
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold uppercase tracking-wider mb-4 text-gray-300">Quick Links</h4>
-                <ul className="text-sm text-gray-400 space-y-1.5">
-                  <li><a href="/about" className="hover:text-white transition-colors">About Dr Marshall</a></li>
-                  <li><a href="/our-services" className="hover:text-white transition-colors">Our Services</a></li>
-                  <li><a href="/patient-information" className="hover:text-white transition-colors">Patient Information</a></li>
-                  <li><a href="/request-an-appointment" className="hover:text-white transition-colors">Request Appointment</a></li>
-                  <li><a href="/contact" className="hover:text-white transition-colors">Contact</a></li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold uppercase tracking-wider mb-4 text-gray-300">Professional Associations</h4>
-                <div className="grid grid-cols-3 gap-3">
-                  <img src="/images/eshrelogo-uai-258x103.png" alt="ESHRE" className="h-12 w-auto object-contain" />
-                  <img src="/images/ama_logo250-uai-258x103.png" alt="AMA" className="h-12 w-auto object-contain" />
-                  <img src="/images/ranzcog-uai-258x103.png" alt="RANZCOG" className="h-12 w-auto object-contain" />
-                  <img src="/images/ASCCP-textlogo-.jpg-uai-258x103.png" alt="ASCCP" className="h-12 w-auto object-contain" />
-                  <img src="/images/ISGE_logo_blauw_440x164-300x112-300x112-uai-258x103.png" alt="ISGE" className="h-12 w-auto object-contain" />
-                  <img src="/images/ages-logo-content-uai-258x103.png" alt="AGES" className="h-12 w-auto object-contain" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 text-center text-xs text-gray-500 py-4 space-x-4">
-            <span>&copy; {new Date().getFullYear()} Dr Brett Marshall</span>
-            <a href="/privacy-policy" className="hover:text-gray-300">Privacy Policy</a>
-            <span>·</span>
-            <a href="/disclaimer" className="hover:text-gray-300">Disclaimer</a>
-            <span>·</span>
-            <a href="/terms-conditions" className="hover:text-gray-300">Terms &amp; Conditions</a>
+        {/* Footer — 5-column links on brand color bg */}
+        <footer className="bg-[#253d47] text-white mt-16">
+          <FooterLinks />
+          <div className="border-t border-white/10 text-center text-sm text-gray-400 py-4">
+            &copy; {new Date().getFullYear()} Dr Brett Marshall. All rights reserved
           </div>
         </footer>
       </div>
