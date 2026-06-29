@@ -1,106 +1,175 @@
 import Head from "next/head";
-import { pages } from "../data/content";
+import { useState, useEffect, useCallback } from "react";
+
+const slides = [
+  {
+    image: "/images/surgery-banner-e1547269060618.jpg",
+    text: "Dr Brett Marshall has extensive experience in advanced laparoscopic and hysteroscopic surgery",
+  },
+  {
+    image: "/images/incontinence-banner-e1547269083934.jpg",
+    text: "Offering holistic and surgical treatment options for prolapse and urinary incontinence",
+  },
+  {
+    image: "/images/best-results-banner-e1547269101397.jpg",
+    text: "Using the latest technology, expert knowledge, and a caring manner to deliver the best results for patients",
+  },
+  {
+    image: "/images/welcome-banner-e1547269304504.jpg",
+    text: "Providing considerable experience with professional, friendly care for a range of women's health issues",
+  },
+];
 
 export default function HomePage() {
-  const page = pages["index"];
-  if (!page) return null;
+  const [current, setCurrent] = useState(0);
+  const next = useCallback(() => setCurrent((c) => (c + 1) % slides.length), []);
+  const prev = useCallback(() => setCurrent((c) => (c - 1 + slides.length) % slides.length), []);
 
-  // Extract text-only version of the content for the welcome section
-  const textContent = page.content.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  useEffect(() => {
+    const t = setInterval(next, 5000);
+    return () => clearInterval(t);
+  }, [next]);
 
   return (
     <>
       <Head>
-        <title>Dr Brett Marshall — Specialist Obstetrician & Gynaecologist</title>
-        <meta name="description" content="Dr Brett Marshall provides expert gynaecological care on the Mornington Peninsula. Consulting in Frankston, operating at Peninsula Private and Beleura Private Hospitals." />
+        <title>Dr Brett Marshall — Specialist Obstetrician & Gynaecologist | Frankston</title>
+        <meta name="description" content="Dr Brett Marshall is a specialist obstetrician / gynaecologist based on the Mornington Peninsula, Victoria. He consults at his practice in Frankston, and operates at Peninsula Private Hospital and Beleura Private Hospital." />
       </Head>
 
-      {/* Hero Section */}
-      <section className="bg-[#1a3a4a] text-white">
-        <div className="max-w-6xl mx-auto px-4 py-24 md:py-32">
-          <div className="max-w-2xl">
-            <p className="text-sm uppercase tracking-widest mb-4 text-gray-300">Specialist Obstetrician & Gynaecologist</p>
-            <h1 className="text-4xl md:text-5xl font-light leading-tight mb-8">
-              Using the latest technology, expert knowledge, and a caring manner to deliver the best results for patients
-            </h1>
-            <div className="flex flex-wrap gap-4">
-              <a href="/our-services" className="inline-block bg-white text-[#1a3a4a] px-8 py-3 rounded font-medium hover:bg-gray-100 transition-colors">
-                Our Services
-              </a>
-              <a href="/request-an-appointment" className="inline-block border-2 border-white text-white px-8 py-3 rounded font-medium hover:bg-white hover:text-[#1a3a4a] transition-colors">
-                Request Appointment
-              </a>
+      {/* Hero Slider */}
+      <section className="relative bg-[#1a3a4a] overflow-hidden" style={{ minHeight: "500px" }}>
+        {/* Background images */}
+        {slides.map((slide, i) => (
+          <div
+            key={i}
+            className="absolute inset-0 transition-opacity duration-700"
+            style={{
+              opacity: i === current ? 0.35 : 0,
+              backgroundImage: `url(${slide.image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+        ))}
+
+        {/* Overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1a3a4a]/80 to-transparent" />
+
+        {/* Content */}
+        <div className="relative z-10 max-w-[1200px] mx-auto px-4 flex items-center" style={{ minHeight: "500px" }}>
+          <div className="max-w-xl py-20">
+            <div className="relative">
+              {slides.map((slide, i) => (
+                <div
+                  key={i}
+                  className="transition-all duration-500"
+                  style={{
+                    opacity: i === current ? 1 : 0,
+                    position: i === current ? "relative" : "absolute",
+                    top: 0,
+                    left: 0,
+                  }}
+                >
+                  {i === current && (
+                    <>
+                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-white leading-snug mb-6">
+                        {slide.text}
+                      </h2>
+                      <a
+                        href="/our-services"
+                        className="inline-block border-2 border-white/60 text-white px-6 py-2.5 text-sm font-semibold tracking-wider hover:bg-white hover:text-[#1a3a4a] transition-colors"
+                      >
+                        READ MORE ABOUT OUR SERVICES
+                      </a>
+                    </>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </div>
+
+        {/* Navigation arrows */}
+        <button onClick={prev} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-3xl z-20 transition-colors">
+          ‹
+        </button>
+        <button onClick={next} className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-3xl z-20 transition-colors">
+          ›
+        </button>
       </section>
 
       {/* Welcome Section */}
-      <section className="max-w-4xl mx-auto px-4 py-16">
+      <section className="max-w-[1200px] mx-auto px-4 py-16">
         <div className="text-center mb-12">
+          <div className="w-16 h-px bg-[#1a3a4a] mx-auto mb-4" />
           <h2 className="text-3xl font-light text-[#1a3a4a]">Welcome</h2>
-          <div className="w-12 h-[2px] bg-[#1a3a4a] mx-auto mt-3" />
+          <div className="w-10 h-px bg-[#1a3a4a] mx-auto mt-4" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-gray-600 leading-relaxed">
-          <div>
-            <p>Dr Brett Marshall is a specialist obstetrician / gynaecologist based on the Mornington Peninsula, Victoria. He consults at his practice in Frankston, and operates at Peninsula Private Hospital and Beleura Private Hospital. Brett also works as a senior consultant gynaecologist at the Royal Women&apos;s Hospital, Melbourne.</p>
-            <p className="mt-4">Brett has been in private practice since 1990 and has extensive experience in treating women&apos;s health issues. His knowledge, coupled with his warm and caring manner, and interest in complex cases, ensures that his patients get the best possible results. Brett&apos;s communication style is clear and concise, using plain language.</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+          <div className="text-sm leading-relaxed text-gray-600 space-y-3">
+            <p>
+              Dr Brett Marshall is a specialist obstetrician / gynaecologist based on the Mornington Peninsula, Victoria. He consults at his practice in Frankston, and operates at Peninsula Private Hospital and Beleura Private Hospital. Brett also works as a senior consultant gynaecologist at the Royal Women&apos;s Hospital, Melbourne.
+            </p>
+            <p>
+              Brett has been in private practice since 1990 and has extensive experience in treating women&apos;s health issues. His knowledge, coupled with his warm and caring manner, and interest in complex cases, ensures that his patients get the best possible results. Brett&apos;s communication style is clear and concise, using plain language.
+            </p>
           </div>
-          <div>
-            <p>He was one of the first surgeons to perform <a href="/services/endometrial-ablation" className="text-[#1a3a4a] hover:underline">endometrial ablation</a> in Australia and is a specialist in hysteroscopic surgery. Brett also has special interests in <a href="/services/endometriosis" className="text-[#1a3a4a] hover:underline">endometriosis</a> and <a href="/services/laparoscopic-surgery" className="text-[#1a3a4a] hover:underline">laparoscopic surgery</a>, having performed over 5000 operative laparoscopies.</p>
-            <p className="mt-4">Brett also has wide experience in general gynaecology and performs pelvic floor and incontinence surgery. <a href="/services/pelvic-organ-prolapse" className="text-[#1a3a4a] hover:underline">Pelvic floor dysfunction</a>, including prolapse and <a href="/services/urinary-incontinence" className="text-[#1a3a4a] hover:underline">urinary incontinence</a>, is managed holistically in conjunction with our on-site <a href="/services/pelvic-floor-physiotherapist" className="text-[#1a3a4a] hover:underline">Physiotherapist</a>.</p>
+          <div className="text-sm leading-relaxed text-gray-600 space-y-3">
+            <p>
+              He was one of the first surgeons to perform{" "}
+              <a href="/services/endometrial-ablation" className="text-[#1a3a4a] hover:underline">endometrial ablation</a>{" "}
+              in Australia and is a specialist in hysteroscopic surgery. Brett also has special interests in{" "}
+              <a href="/services/endometriosis" className="text-[#1a3a4a] hover:underline">endometriosis</a>{" "}
+              and{" "}
+              <a href="/services/laparoscopic-surgery" className="text-[#1a3a4a] hover:underline">laparoscopic surgery</a>
+              , having performed over 5000 operative laparoscopies. His expertise in advanced laparoscopic surgery includes using{" "}
+              <a href="/services/laser-laparoscopy" className="text-[#1a3a4a] hover:underline">CO₂ laser excisional surgery</a>{" "}
+              as well as other modalities.
+            </p>
+            <p>
+              Brett also has wide experience in general gynaecology and performs pelvic floor and incontinence surgery, utilising slings where appropriate.{" "}
+              <a href="/services/pelvic-organ-prolapse" className="text-[#1a3a4a] hover:underline">Pelvic floor dysfunction</a>
+              , including{" "}
+              <a href="/services/pelvic-organ-prolapse" className="text-[#1a3a4a] hover:underline">prolapse</a>{" "}
+              and{" "}
+              <a href="/services/urinary-incontinence" className="text-[#1a3a4a] hover:underline">urinary incontinence</a>
+              , is managed holistically in conjunction with our on-site{" "}
+              <a href="/services/pelvic-floor-physiotherapist" className="text-[#1a3a4a] hover:underline">Physiotherapist</a>
+              , as well as the{" "}
+              <a href="/services/neotonus-pelvic-floor-chair" className="text-[#1a3a4a] hover:underline">Neotonus Pelvic Floor Chair</a>
+              . Brett is also an experienced colposcopist, utilising CO₂ laser treatment for{" "}
+              <a href="/services/abnormal-pap-smears-vulval-disorders" className="text-[#1a3a4a] hover:underline">abnormal pap smears</a>.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* CTA Cards */}
-      <section className="bg-gray-50 py-16">
-        <div className="max-w-6xl mx-auto px-4">
+      {/* CTA Cards Section */}
+      <section className="bg-[#f7f7f7] py-16">
+        <div className="max-w-[1200px] mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <CtaCard
-              icon="📋"
-              title="Patient Information"
-              description="Important information about conditions and operations"
+              title="Patient Information &amp; Literature"
+              subtitle="Important information about conditions and operations"
               href="/patient-information"
             />
             <CtaCard
-              icon="❓"
               title="FAQs"
-              description="Answers to our most frequently asked questions"
+              subtitle="Answers to our most frequently asked questions"
               href="/frequently-asked-questions-faq"
             />
             <CtaCard
-              icon="🩺"
               title="Services"
-              description="Procedures and treatments available at our practice"
+              subtitle="Procedures and treatments available at our practice"
               href="/our-services"
             />
             <CtaCard
-              icon="📅"
               title="Request an Appointment"
-              description="Contact our rooms to request an appointment with Dr Marshall"
+              subtitle="Contact our rooms to request an appointment with Dr Marshall"
               href="/request-an-appointment"
             />
-          </div>
-        </div>
-      </section>
-
-      {/* Hospitals */}
-      <section className="max-w-4xl mx-auto px-4 py-16 text-center">
-        <h2 className="text-2xl font-light text-[#1a3a4a] mb-8">Operating At</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="p-6">
-            <div className="text-3xl font-bold text-[#1a3a4a]">Peninsula Private</div>
-            <p className="text-sm text-gray-500 mt-2">Langwarrin</p>
-          </div>
-          <div className="p-6">
-            <div className="text-3xl font-bold text-[#1a3a4a]">Beleura Private</div>
-            <p className="text-sm text-gray-500 mt-2">Mornington</p>
-          </div>
-          <div className="p-6">
-            <div className="text-3xl font-bold text-[#1a3a4a]">Royal Women&apos;s</div>
-            <p className="text-sm text-gray-500 mt-2">Melbourne</p>
           </div>
         </div>
       </section>
@@ -108,12 +177,14 @@ export default function HomePage() {
   );
 }
 
-function CtaCard({ icon, title, description, href }: { icon: string; title: string; description: string; href: string }) {
+function CtaCard({ title, subtitle, href }: { title: string; subtitle: string; href: string }) {
   return (
-    <a href={href} className="block bg-white p-8 rounded-lg shadow-sm border hover:shadow-md hover:border-[#1a3a4a] transition-all group text-center">
-      <div className="text-3xl mb-4">{icon}</div>
-      <h3 className="font-semibold text-[#1a3a4a] text-lg mb-2 group-hover:underline">{title}</h3>
-      <p className="text-sm text-gray-500">{description}</p>
+    <a href={href} className="block bg-white p-8 text-center rounded-sm shadow-sm border border-gray-100 hover:shadow-md hover:border-[#1a3a4a]/30 transition-all group">
+      <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#1a3a4a]/5 flex items-center justify-center group-hover:bg-[#1a3a4a]/10 transition-colors">
+        <span className="text-[#1a3a4a] text-xl">+</span>
+      </div>
+      <h3 className="font-semibold text-[#1a3a4a] text-base mb-2">{title}</h3>
+      <p className="text-xs text-gray-500 leading-relaxed">{subtitle}</p>
     </a>
   );
 }
