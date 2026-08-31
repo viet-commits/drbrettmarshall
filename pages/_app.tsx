@@ -2,145 +2,210 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Fraunces, Inter } from "next/font/google";
 import cleanContent from "../data/clean_content.json";
+import {
+  PhoneIcon, MailIcon, FaxIcon, MapPinIcon, ChevronDownIcon,
+  MenuIcon, XIcon, ArrowRightIcon,
+} from "../components/icons";
 
 const fraunces = Fraunces({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-display", display: "swap" });
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-body", display: "swap" });
 
 const CONDITION_SLUGS = [
-  "abnormal-pap-smears-vulval-disorders","adhesions","endometriosis",
-  "fibroids","infertility","menorrhagia-heavy-periods","pcos",
-  "pelvic-organ-prolapse","pelvic-pain","urinary-incontinence"
+  "abnormal-pap-smears-vulval-disorders", "adhesions", "endometriosis",
+  "fibroids", "infertility", "menorrhagia-heavy-periods", "pcos",
+  "pelvic-organ-prolapse", "pelvic-pain", "urinary-incontinence",
 ];
 
-function FooterLinks() {
+const PHONE = "03 9776 6411";
+const FAX = "03 9039 5060";
+const EMAIL = "admin@pengyn.com.au";
+const ADDRESS = "Suite 3, 7 Foot Street, Frankston VIC 3199";
+
+type NavItem = { label: string; href?: string; children?: { label: string; href: string; note?: string }[] };
+
+const NAV: NavItem[] = [
+  { label: "About", href: "/about" },
+  {
+    label: "Patient Information",
+    children: [
+      { label: "About Your Visit", href: "/about-your-visit" },
+      { label: "Request an Appointment", href: "/request-an-appointment" },
+      { label: "Operations & Conditions", href: "/our-services" },
+      { label: "Patient Forms", href: "/patient-forms" },
+      { label: "New Patient Form", href: "/patient-forms/new-patient-form" },
+      { label: "Pelvic Floor Questionnaire", href: "/download/73416/?tmstv=1689550320", note: "PDF" },
+    ],
+  },
+  {
+    label: "Services",
+    children: [
+      { label: "Conditions Treated", href: "/our-services" },
+      { label: "Procedures & Treatments", href: "/our-services#treatments" },
+      { label: "Frequently Asked Questions", href: "/frequently-asked-questions-faq" },
+      { label: "TeleHealth", href: "#", note: "Coming soon" },
+    ],
+  },
+  { label: "FAQs", href: "/frequently-asked-questions-faq" },
+  {
+    label: "For Doctors",
+    children: [
+      { label: "Refer a Patient", href: "/refer-a-patient" },
+      { label: "Photo Gallery", href: "/for-doctors", note: "Private" },
+    ],
+  },
+];
+
+function Footer() {
   const services = cleanContent.services as Record<string, { title: string }>;
-  const procedureSlugs = Object.keys(services).filter(s => !CONDITION_SLUGS.includes(s));
-  
-  const cols = [
-    { heading: "Site Links", links: [
-      ["About Dr Marshall","/about"],["Patient Information","/patient-information"],["Services","/our-services"],
-      ["Frequently Asked Questions","/frequently-asked-questions-faq"],["Contact Us","/contact"],
-      ["Disclaimer","/disclaimer"],["Privacy Policy","/privacy-policy"],
-    ]},
-    { heading: "For Patients", links: [
-      ["Patient Information & Forms","/patient-information"],["Operations and Conditions","/our-services"],
-      ["About your visit","/about-your-visit"],["New Patient Registration","/patient-forms/new-patient-form"],
-      ["Photo Gallery","/for-doctors"],
-    ]},
-    { heading: "For Doctors", links: [
-      ["Refer a Patient","/refer-a-patient"],["Photo Gallery","/for-doctors"],
-    ]},
-    { heading: "Conditions Treated", links: CONDITION_SLUGS.slice(0,8).map(s => [services[s]?.title || s, `/services/${s}`]) },
-    { heading: "Procedures", links: procedureSlugs.slice(0,8).map(s => [services[s]?.title || s, `/services/${s}`]) },
-  ];
+  const procedureSlugs = Object.keys(services).filter((s) => !CONDITION_SLUGS.includes(s));
 
   return (
-    <div className="max-w-[1200px] mx-auto px-4 py-12">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-        {cols.map(col => (
+    <footer className="bg-brand text-white">
+      <div className="max-w-[1200px] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        <div className="lg:col-span-1">
+          <img src="/images/DBM_Logo.png" alt="Dr Brett Marshall" className="h-12 w-auto mb-4" />
+          <p className="text-sm text-white/70 leading-relaxed mb-5">
+            Specialist obstetrician &amp; gynaecologist on the Mornington Peninsula — advanced laparoscopic and hysteroscopic surgery.
+          </p>
+          <div className="space-y-2 text-sm text-white/80">
+            <a href={`tel:${PHONE.replace(/\s/g, "")}`} className="flex items-center gap-2 hover:text-white"><PhoneIcon className="w-4 h-4 text-accent" />{PHONE}</a>
+            <a href={`mailto:${EMAIL}`} className="flex items-center gap-2 hover:text-white"><MailIcon className="w-4 h-4 text-accent" />{EMAIL}</a>
+            <span className="flex items-center gap-2"><FaxIcon className="w-4 h-4 text-accent" />{FAX}</span>
+            <span className="flex items-start gap-2"><MapPinIcon className="w-4 h-4 text-accent mt-0.5" />{ADDRESS}</span>
+          </div>
+        </div>
+
+        {[
+          { heading: "Site Links", links: [
+            ["About Dr Marshall", "/about"], ["Patient Information", "/patient-information"],
+            ["Services", "/our-services"], ["FAQs", "/frequently-asked-questions-faq"],
+            ["Contact Us", "/contact"], ["Privacy Policy", "/privacy-policy"], ["Disclaimer", "/disclaimer"],
+          ]},
+          { heading: "For Patients", links: [
+            ["Patient Information & Forms", "/patient-information"], ["About your visit", "/about-your-visit"],
+            ["Request an Appointment", "/request-an-appointment"], ["New Patient Form", "/patient-forms/new-patient-form"],
+          ]},
+          { heading: "For Doctors", links: [
+            ["Refer a Patient", "/refer-a-patient"], ["Photo Gallery", "/for-doctors"],
+          ]},
+          { heading: "Conditions", links: CONDITION_SLUGS.slice(0, 8).map((s) => [services[s]?.title || s, `/services/${s}`]) },
+        ].map((col) => (
           <div key={col.heading}>
-            <h4 className="text-[#8bb2c4] text-lg font-semibold mb-4">{col.heading}</h4>
-            <ul className="space-y-1.5">
+            <h4 className="font-sans text-accent text-sm font-semibold uppercase tracking-wider mb-4">{col.heading}</h4>
+            <ul className="space-y-2.5">
               {col.links.map(([label, href]) => (
-                <li key={label}><a href={href} className="text-base text-white/90 hover:text-white hover:underline transition-colors">{label}</a></li>
+                <li key={label}><a href={href} className="text-sm text-white/80 hover:text-white transition-colors">{label}</a></li>
               ))}
             </ul>
           </div>
         ))}
       </div>
-    </div>
+
+      <div className="border-t border-white/10">
+        <div className="max-w-[1200px] mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/60">
+          <p>&copy; {new Date().getFullYear()} Dr Brett Marshall · MBBS FRANZCOG · AHPRA registered specialist</p>
+          <div className="flex items-center gap-4">
+            <a href="/privacy-policy" className="hover:text-white">Privacy</a>
+            <a href="/disclaimer" className="hover:text-white">Disclaimer</a>
+            <a href="/terms-conditions" className="hover:text-white">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 }
 
 export default function App({ Component, pageProps }: AppProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
       <Head>
-        <title>Dr Brett Marshall — Specialist Obstetrician & Gynaecologist</title>
+        <title>Dr Brett Marshall — Specialist Obstetrician &amp; Gynaecologist</title>
         <meta name="description" content="Dr Brett Marshall provides expert gynaecological care on the Mornington Peninsula. Consulting in Frankston, operating at Peninsula Private and Beleura Private Hospitals." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={`${fraunces.variable} ${inter.variable} bg-white text-gray-700 antialiased min-h-screen flex flex-col`}>
-        
-        {/* Top Bar — light bg, dark text, 12px */}
-        <div className="bg-white text-[#253d47] text-xs hidden md:block border-b border-gray-100">
-          <div className="max-w-[1200px] mx-auto flex items-center px-4 py-1.5 gap-3">
-            <a href="/request-an-appointment" className="hover:opacity-70 transition-opacity">
-              <span>Appointments</span>
-              <span className="ml-0.5 opacity-40">›</span>
-            </a>
-            <a href="tel:+613****6411" className="hover:opacity-70 transition-opacity">
-              <span>03 9776 6411</span>
-              <span className="ml-0.5 opacity-40">›</span>
-            </a>
-            <a href="/contact" className="hover:opacity-70 transition-opacity text-right ml-auto">
-              <span>Suite 3, 7 Foot Street, Frankston, VIC 3199</span>
-              <span className="ml-0.5 opacity-40">›</span>
-            </a>
+      <div className={`${fraunces.variable} ${inter.variable} bg-white text-ink antialiased min-h-screen flex flex-col`}>
+        {/* Top bar — contact strip */}
+        <div className="bg-brand text-white/90 text-xs hidden md:block">
+          <div className="max-w-[1200px] mx-auto flex items-center px-6 py-2 gap-6">
+            <a href={`tel:${PHONE.replace(/\s/g, "")}`} className="flex items-center gap-1.5 hover:text-white transition-colors"><PhoneIcon className="w-3.5 h-3.5 text-accent" />{PHONE}</a>
+            <a href={`mailto:${EMAIL}`} className="flex items-center gap-1.5 hover:text-white transition-colors"><MailIcon className="w-3.5 h-3.5 text-accent" />{EMAIL}</a>
+            <span className="ml-auto flex items-center gap-1.5"><MapPinIcon className="w-3.5 h-3.5 text-accent" />{ADDRESS}</span>
           </div>
         </div>
 
-        {/* Header — nav: 18px, 400w, sentence case, no uppercase */}
-        <header className="bg-white sticky top-0 z-50 border-b border-gray-100">
-          <div className="max-w-[1200px] mx-auto flex items-center justify-between px-4">
-            <a href="/" className="flex-shrink-0 py-3">
-              <img src="/images/DBM_Logo.png" alt="Dr Brett Marshall" className="h-14 w-auto" />
-            </a>
+        {/* Header */}
+        <header className={`bg-white sticky top-0 z-50 transition-shadow ${scrolled ? "shadow-md" : "border-b border-line"}`}>
+          <div className="max-w-[1200px] mx-auto flex items-center justify-between px-6">
+            <Link href="/" className="flex items-center gap-3 py-3 flex-shrink-0">
+              <img src="/images/DBM_Logo.png" alt="Dr Brett Marshall" className="h-12 w-auto" />
+              <span className="leading-tight">
+                <span className="block font-serif text-lg font-semibold text-brand">Dr Brett Marshall</span>
+                <span className="block text-[11px] uppercase tracking-widest text-muted">MBBS FRANZCOG</span>
+              </span>
+            </Link>
 
-            {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center text-lg font-normal">
-              <a href="/about" className="px-3 py-5 hover:text-[#253d47] transition-colors">About</a>
-              
-              <NavDropdown label="Patient Information">
-                <DropdownLink href="/about-your-visit">About Your Visit</DropdownLink>
-                <DropdownLink href="/request-an-appointment">Request an Appointment</DropdownLink>
-                <DropdownLink href="/our-services">Operations and Conditions</DropdownLink>
-                <div className="border-t border-gray-100 my-1" />
-                <div className="px-4 py-1.5 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Patient Forms</div>
-                <DropdownLink href="/patient-forms/new-patient-form">New Patient Form</DropdownLink>
-                <DropdownLink href="/download/73416/?tmstv=1689550320" external>Pelvic Floor Questionnaire</DropdownLink>
-              </NavDropdown>
+            <nav className="hidden lg:flex items-center">
+              {NAV.map((item) => item.children ? (
+                <div key={item.label} className="relative group">
+                  <button className="flex items-center gap-1 px-3.5 py-6 text-[15px] text-ink hover:text-brand transition-colors">
+                    {item.label}
+                    <ChevronDownIcon className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 transition-all" />
+                  </button>
+                  <div className="absolute top-full left-0 min-w-[260px] bg-white border border-line shadow-lg rounded-sm py-2 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 focus-within:opacity-100 focus-within:visible focus-within:translate-y-0 transition-all duration-150 z-50">
+                    {item.children.map((c) => (
+                      <Link key={c.label} href={c.href} className="flex items-center justify-between px-5 py-2.5 text-sm text-ink/80 hover:text-brand hover:bg-surface-muted transition-colors">
+                        {c.label}
+                        {c.note && <span className="text-[10px] uppercase tracking-wider text-muted">{c.note}</span>}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link key={item.label} href={item.href!} className="px-3.5 py-6 text-[15px] text-ink hover:text-brand transition-colors">
+                  {item.label}
+                </Link>
+              ))}
 
-              <NavDropdown label="Services">
-                <DropdownLink href="/our-services">Conditions Treated</DropdownLink>
-                <DropdownLink href="/our-services#treatments">Procedures and Treatments</DropdownLink>
-                <span className="block px-4 py-2 text-gray-400 italic text-sm">TeleHealth — Coming Soon</span>
-                <div className="border-t border-gray-100 my-1" />
-                <DropdownLink href="/frequently-asked-questions-faq">FAQs</DropdownLink>
-              </NavDropdown>
-
-              <a href="/frequently-asked-questions-faq" className="px-3 py-5 hover:text-[#253d47] transition-colors">FAQs</a>
-
-              <NavDropdown label="For Doctors">
-                <DropdownLink href="/for-doctors">Photo Gallery</DropdownLink>
-                <DropdownLink href="/refer-a-patient">Refer a Patient</DropdownLink>
-              </NavDropdown>
-
-              <a href="/contact" className="ml-3 bg-[#253d47] text-white px-4 py-1.5 text-sm font-semibold hover:bg-[#2d4d57] transition-colors">CONTACT</a>
-              <a href="#" className="ml-2 px-2 py-5 text-base hover:text-[#253d47] transition-colors" title="Search">🔍</a>
+              <Link href="/request-an-appointment" className="ml-4 bg-brand text-white px-5 py-2.5 text-sm font-semibold rounded-sm hover:bg-brand-light transition-colors inline-flex items-center gap-2">
+                Request Appointment <ArrowRightIcon className="w-4 h-4" />
+              </Link>
             </nav>
 
-            {/* Mobile toggle */}
-            <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden text-[#253d47] text-2xl px-2">
-              {mobileOpen ? "✕" : "☰"}
+            <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden text-brand p-2" aria-label="Menu">
+              {mobileOpen ? <XIcon className="w-7 h-7" /> : <MenuIcon className="w-7 h-7" />}
             </button>
           </div>
 
-          {/* Mobile Nav */}
           {mobileOpen && (
-            <div className="lg:hidden bg-white border-t px-4 py-4 space-y-1 text-sm font-medium">
-              <a href="/about" className="block py-2">About</a>
-              <a href="/patient-information" className="block py-2">Patient Information</a>
-              <a href="/our-services" className="block py-2">Services</a>
-              <a href="/frequently-asked-questions-faq" className="block py-2">FAQs</a>
-              <a href="/for-doctors" className="block py-2">For Doctors</a>
-              <a href="/contact" className="block py-2 text-[#253d47] font-bold">CONTACT</a>
+            <div className="lg:hidden bg-white border-t border-line max-h-[80vh] overflow-y-auto">
+              <nav className="px-6 py-4">
+                {NAV.map((item) => (
+                  <div key={item.label} className="border-b border-line last:border-0">
+                    {item.children ? (
+                      <MobileAccordion item={item} />
+                    ) : (
+                      <Link href={item.href!} onClick={() => setMobileOpen(false)} className="block py-3.5 text-base text-ink hover:text-brand">{item.label}</Link>
+                    )}
+                  </div>
+                ))}
+                <Link href="/request-an-appointment" onClick={() => setMobileOpen(false)} className="mt-4 bg-brand text-white px-5 py-3 rounded-sm font-semibold text-center block">
+                  Request Appointment
+                </Link>
+              </nav>
             </div>
           )}
         </header>
@@ -149,36 +214,30 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </main>
 
-        {/* Footer — 5-column links on brand color bg */}
-        <footer className="bg-[#253d47] text-white mt-16">
-          <FooterLinks />
-          <div className="border-t border-white/10 text-center text-sm text-gray-400 py-4">
-            &copy; {new Date().getFullYear()} Dr Brett Marshall. All rights reserved
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
 }
 
-function NavDropdown({ label, children }: { label: string; children: React.ReactNode }) {
+function MobileAccordion({ item }: { item: NavItem }) {
+  const [open, setOpen] = useState(false);
   return (
-    <div className="relative group">
-      <span className="px-3 py-5 cursor-default group-hover:text-[#253d47] transition-colors inline-flex items-center gap-0.5">
-        {label} <span className="text-[9px] opacity-50">▼</span>
-      </span>
-      <div className="absolute top-full left-0 mt-0 bg-white border border-gray-200 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 min-w-[240px] z-50 py-1">
-        {children}
-      </div>
+    <div>
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-3.5 text-base text-ink">
+        {item.label}
+        <ChevronDownIcon className={`w-4 h-4 text-muted transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && (
+        <div className="pb-3 space-y-1">
+          {item.children!.map((c) => (
+            <Link key={c.label} href={c.href} className="block pl-4 py-2 text-[15px] text-ink/80 hover:text-brand">
+              {c.label}
+              {c.note && <span className="ml-2 text-[10px] uppercase tracking-wider text-muted">{c.note}</span>}
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
-  );
-}
-
-function DropdownLink({ href, children, external }: { href: string; children: React.ReactNode; external?: boolean }) {
-  const props = external ? { target: "_blank", rel: "noopener noreferrer" } : {};
-  return (
-    <a href={href} {...props} className="block px-4 py-2 text-gray-600 hover:text-[#253d47] hover:bg-gray-50 text-sm font-normal">
-      {children}
-    </a>
   );
 }
