@@ -1,64 +1,26 @@
 import { GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
-import cleanContent from "../../data/clean_content.json";
-
-interface ServiceData {
-  title: string;
-  content: string;
-  meta: string;
-}
-
-function splitParagraphs(text: string): string[] {
-  if (!text) return [];
-  return text.split(/\n\s*\n/).filter(p => p.trim());
-}
-
-function findRelated(slug: string, content: string): Array<[string, string]> {
-  const seen = new Set<string>();
-  const related: Array<[string, string]> = [];
-  for (const [otherSlug, svc] of Object.entries(cleanContent.services)) {
-    if (otherSlug === slug) continue;
-    const title = (svc as ServiceData).title;
-    if (content.toLowerCase().includes(title.toLowerCase()) && !seen.has(title)) {
-      seen.add(title);
-      related.push([otherSlug, title]);
-    }
-  }
-  return related.slice(0, 6);
-}
+import Link from "next/link";
+import { PhoneIcon, ArrowRightIcon } from "../../components/icons";
+import { services, parseSections, findRelated, type ServiceData } from "../../lib/services";
 
 export default function ServicePage({ slug }: { slug: string }) {
-  const svc = (cleanContent.services as Record<string, ServiceData>)[slug];
-  if (!svc) return <div className="max-w-4xl mx-auto px-4 py-12"><h1>Service not found</h1></div>;
-
-  const content = svc.content;
-  const sections = content.split(/(?=(?:Treatments?|Procedures?|Related|Advantages?|What |How |Why |When |Is |Can |Will |Do |Surgery|Treatment|Description))/);
-  
-  let description = sections[0] || "";
-  let treatment = "";
-  let relatedTitle = "";
-  
-  for (const s of sections.slice(1)) {
-    if (/^(?:Treatments?|Procedures?|Surgery|Treatment)/i.test(s) && !treatment) {
-      treatment = s;
-    } else if (/^(?:Related|Advantages?)/i.test(s)) {
-      relatedTitle += s;
-    } else if (treatment) {
-      treatment += " " + s;
-    } else {
-      description += " " + s;
-    }
+  const svc = services[slug];
+  if (!svc) {
+    return (
+      <div className="max-w-4xl mx-auto px-6 py-16">
+        <h1 className="font-serif text-3xl font-semibold text-brand">Service not found</h1>
+      </div>
+    );
   }
 
-  const descParas = splitParagraphs(description);
-  const treatmentParas = splitParagraphs(treatment);
-  const relatedServices = findRelated(slug, content);
+  const { description, treatment } = parseSections(svc.content, svc.title);
+  const related = findRelated(slug, svc.content);
 
-  const allServices = Object.entries(cleanContent.services)
+  const allServices = Object.entries(services)
     .map(([s, d]) => [s, (d as ServiceData).title] as [string, string])
     .sort((a, b) => a[1].localeCompare(b[1]))
-    .filter(([s]) => s !== slug)
-    .slice(0, 12);
+    .filter(([s]) => s !== slug);
 
   return (
     <>
@@ -67,81 +29,80 @@ export default function ServicePage({ slug }: { slug: string }) {
         <meta name="description" content={`${svc.title} — specialist gynaecological care by Dr Brett Marshall on the Mornington Peninsula.`} />
       </Head>
 
-      <div className="bg-gray-50 border-b">
-        <div className="max-w-[1200px] mx-auto px-4 py-8">
-          <nav className="text-xs text-gray-400 mb-2">
-            <a href="/" className="hover:text-[#253d47]">Home</a> / <a href="/our-services" className="hover:text-[#253d47]">Services</a> / <span className="text-[#253d47]">{svc.title}</span>
+      <div className="bg-surface-muted border-b border-line">
+        <div className="max-w-[1200px] mx-auto px-6 py-12">
+          <nav className="text-xs text-muted mb-3 flex items-center gap-1.5" aria-label="Breadcrumb">
+            <Link href="/" className="hover:text-brand">Home</Link><span aria-hidden>/</span>
+            <Link href="/our-services" className="hover:text-brand">Services</Link><span aria-hidden>/</span>
+            <span className="text-ink/70">{svc.title}</span>
           </nav>
-          <h1 className="text-[29px] font-semibold text-[#253d47]">{svc.title}</h1>
-          <div className="w-10 h-px bg-[#253d47] mt-4" />
+          <h1 className="font-serif text-4xl font-semibold text-brand">{svc.title}</h1>
         </div>
       </div>
 
-      <div className="max-w-[1200px] mx-auto px-4 py-12">
+      <div className="max-w-[1200px] mx-auto px-6 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Main Content */}
           <div className="lg:col-span-2">
             <section className="mb-12">
-              <h2 className="text-sm font-semibold text-[#253d47] uppercase tracking-wide mb-4">Description</h2>
-              <div className="w-8 h-px bg-[#253d47]/30 mb-6" />
-              <div className="text-lg leading-relaxed text-gray-800 space-y-4">
-                {descParas.map((p, i) => <p key={i}>{p}</p>)}
+              <h2 className="text-xs font-semibold uppercase tracking-wider text-muted mb-1">Description</h2>
+              <div className="w-10 h-px bg-accent mb-6" />
+              <div className="text-lg leading-relaxed text-ink/90 space-y-5">
+                {description.map((p, i) => <p key={i}>{p}</p>)}
               </div>
             </section>
 
-            {treatmentParas.length > 0 && (
+            {treatment.length > 0 && (
               <section className="mb-12">
-                <h2 className="text-sm font-semibold text-[#253d47] uppercase tracking-wide mb-4">Treatments and Procedures</h2>
-                <div className="w-8 h-px bg-[#253d47]/30 mb-6" />
-                <div className="text-lg leading-relaxed text-gray-800 space-y-4">
-                  {treatmentParas.map((p, i) => <p key={i}>{p}</p>)}
+                <h2 className="text-xs font-semibold uppercase tracking-wider text-muted mb-1">Treatments and Procedures</h2>
+                <div className="w-10 h-px bg-accent mb-6" />
+                <div className="text-lg leading-relaxed text-ink/90 space-y-5">
+                  {treatment.map((p, i) => <p key={i}>{p}</p>)}
                 </div>
               </section>
             )}
 
-            {relatedServices.length > 0 && (
-              <section className="mb-12">
-                <h2 className="text-sm font-semibold text-[#253d47] uppercase tracking-wide mb-4">Related Literature</h2>
-                <div className="w-8 h-px bg-[#253d47]/30 mb-6" />
+            {related.length > 0 && (
+              <section>
+                <h2 className="text-xs font-semibold uppercase tracking-wider text-muted mb-1">Related</h2>
+                <div className="w-10 h-px bg-accent mb-6" />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {relatedServices.map(([s, title]) => (
-                    <a key={s} href={`/services/${s}`} className="block bg-gray-50 border border-gray-100 rounded-sm p-4 hover:shadow-sm hover:border-[#253d47]/30 transition-all group">
-                      <h3 className="font-medium text-[#253d47] text-sm group-hover:underline">{title}</h3>
-                      <span className="text-xs text-gray-400 mt-1 inline-block">Read More →</span>
-                    </a>
+                  {related.map(([s, title]) => (
+                    <Link key={s} href={`/services/${s}`} className="group flex items-center justify-between bg-surface-muted border border-line rounded-sm p-4 hover:border-brand/25 transition-colors">
+                      <span className="text-[15px] font-medium text-brand group-hover:text-brand-light">{title}</span>
+                      <ArrowRightIcon className="w-4 h-4 text-brand/50 group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
                   ))}
                 </div>
               </section>
             )}
           </div>
 
-          {/* Sidebar */}
           <aside className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
-              <div className="bg-[#253d47] text-white p-6 rounded-sm">
-                <h3 className="font-semibold text-sm uppercase tracking-wider mb-3">Request a Consultation</h3>
-                <p className="text-sm text-white/80 mb-4">Book an appointment with Dr Brett Marshall to discuss your health concerns.</p>
-                <a href="/request-an-appointment" className="block text-center bg-white text-[#253d47] px-4 py-2.5 rounded-sm text-sm font-semibold hover:bg-gray-100 transition-colors">
+              <div className="bg-brand text-white p-6 rounded-sm">
+                <h3 className="font-serif text-lg font-semibold mb-2">Request a consultation</h3>
+                <p className="text-sm text-white/75 mb-5">Book an appointment with Dr Brett Marshall to discuss your health concerns.</p>
+                <Link href="/request-an-appointment" className="block text-center bg-white text-brand px-4 py-3 rounded-sm text-sm font-semibold hover:bg-accent/20 hover:text-white transition-colors">
                   Request Appointment
-                </a>
-                <div className="mt-4 pt-4 border-t border-white/20">
-                  <p className="text-xs text-white/60">Phone</p>
-                  <a href="tel:+613****6411" className="text-sm text-white hover:underline">03 9776 6411</a>
+                </Link>
+                <div className="mt-5 pt-4 border-t border-white/20 flex items-center gap-2">
+                  <PhoneIcon className="w-4 h-4 text-accent" />
+                  <a href="tel:+61397766411" className="text-sm text-white hover:underline">03 9776 6411</a>
                 </div>
               </div>
 
-              <div className="bg-gray-50 border border-gray-100 rounded-sm p-6">
-                <h3 className="font-semibold text-[#253d47] text-sm uppercase tracking-wider mb-4">All Services</h3>
-                <ul className="space-y-2">
+              <div className="bg-surface-muted border border-line rounded-sm p-6">
+                <h3 className="font-serif text-lg font-semibold text-brand mb-4">All Services</h3>
+                <ul className="space-y-1">
                   {allServices.map(([s, title]) => (
                     <li key={s}>
-                      <a href={`/services/${s}`} className="text-sm text-gray-600 hover:text-[#253d47] hover:underline">{title}</a>
+                      <Link href={`/services/${s}`} className="block text-sm text-ink/75 hover:text-brand py-1 hover:underline">{title}</Link>
                     </li>
                   ))}
                 </ul>
-                <a href="/our-services" className="inline-block mt-4 text-xs text-[#253d47] hover:underline font-semibold">
-                  View All Services →
-                </a>
+                <Link href="/our-services" className="inline-flex items-center gap-1.5 mt-4 text-xs font-semibold text-brand hover:underline">
+                  View all services <ArrowRightIcon className="w-3.5 h-3.5" />
+                </Link>
               </div>
             </div>
           </aside>
@@ -152,7 +113,7 @@ export default function ServicePage({ slug }: { slug: string }) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = Object.keys(cleanContent.services).map((slug) => ({ params: { slug } }));
+  const paths = Object.keys(services).map((slug) => ({ params: { slug } }));
   return { paths, fallback: false };
 };
 
