@@ -1,6 +1,19 @@
 import Head from "next/head";
+import Link from "next/link";
+import { useState } from "react";
+import { PageHeader, ContactRow } from "../components/ui";
+import { PhoneIcon, MailIcon, FaxIcon, MapPinIcon, HospitalIcon, ArrowRightIcon } from "../components/icons";
+
+const hospitals = [
+  "Peninsula Private Hospital, Frankston",
+  "Beleura Private Hospital, Mornington",
+  "Royal Women's Hospital, Melbourne",
+  "Cabrini Hospital, Melbourne",
+];
 
 export default function ContactPage() {
+  const [mapLoaded, setMapLoaded] = useState(false);
+
   return (
     <>
       <Head>
@@ -8,93 +21,63 @@ export default function ContactPage() {
         <meta name="description" content="Contact Dr Brett Marshall's practice — Suite 3, 7 Foot Street, Frankston VIC 3199. Phone 03 9776 6411." />
       </Head>
 
-      <div className="bg-gray-50 border-b">
-        <div className="max-w-[1200px] mx-auto px-4 py-8">
-          <h1 className="text-[29px] font-semibold text-[#253d47]">Contact</h1>
-          <div className="text-xs text-gray-400 mt-1">
-            <a href="/" className="hover:text-[#253d47]">Home</a> / Contact
-          </div>
-        </div>
-      </div>
+      <PageHeader title="Contact" />
 
-      <div className="max-w-[1200px] mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Contact Details */}
+      <div className="max-w-[1200px] mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Contact details */}
           <div>
-            <h2 className="text-xl font-light text-[#253d47] mb-6">Get In Touch</h2>
-
-            <div className="space-y-6 text-sm text-gray-600">
-              <div className="flex gap-4">
-                <div className="text-[#253d47] text-lg flex-shrink-0 mt-0.5">📍</div>
-                <div>
-                  <h3 className="font-semibold text-[#253d47] mb-1">Address</h3>
-                  <p>Suite 3, 7 Foot Street<br />Frankston VIC 3199</p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="text-[#253d47] text-lg flex-shrink-0 mt-0.5">📞</div>
-                <div>
-                  <h3 className="font-semibold text-[#253d47] mb-1">Phone</h3>
-                  <a href="tel:+613****6411" className="hover:underline">03 9776 6411</a>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="text-[#253d47] text-lg flex-shrink-0 mt-0.5">✉️</div>
-                <div>
-                  <h3 className="font-semibold text-[#253d47] mb-1">Email</h3>
-                  <a href="mailto:admin@pengyn.com.au" className="hover:underline">admin@pengyn.com.au</a>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="text-[#253d47] text-lg flex-shrink-0 mt-0.5">📠</div>
-                <div>
-                  <h3 className="font-semibold text-[#253d47] mb-1">Fax</h3>
-                  <p>03 9039 5060</p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="text-[#253d47] text-lg flex-shrink-0 mt-0.5">🏥</div>
-                <div>
-                  <h3 className="font-semibold text-[#253d47] mb-1">Operating At</h3>
-                  <ul className="space-y-1">
-                    <li>Peninsula Private Hospital, Frankston</li>
-                    <li>Beleura Private Hospital, Mornington</li>
-                    <li>Royal Women&apos;s Hospital, Melbourne</li>
-                    <li>Cabrini Hospital, Melbourne</li>
-                  </ul>
-                </div>
-              </div>
+            <h2 className="font-serif text-2xl font-semibold text-brand mb-8">Get in touch</h2>
+            <div className="space-y-7">
+              <ContactRow icon={<MapPinIcon className="w-5 h-5" />} label="Address">
+                Suite 3, 7 Foot Street<br />Frankston VIC 3199
+              </ContactRow>
+              <ContactRow icon={<PhoneIcon className="w-5 h-5" />} label="Phone">
+                <a href="tel:+61397766411" className="text-brand font-medium hover:underline">03 9776 6411</a>
+              </ContactRow>
+              <ContactRow icon={<MailIcon className="w-5 h-5" />} label="Email">
+                <a href="mailto:admin@pengyn.com.au" className="text-brand font-medium hover:underline">admin@pengyn.com.au</a>
+              </ContactRow>
+              <ContactRow icon={<FaxIcon className="w-5 h-5" />} label="Fax">
+                03 9039 5060
+              </ContactRow>
+              <ContactRow icon={<HospitalIcon className="w-5 h-5" />} label="Operating at">
+                <ul className="space-y-1">
+                  {hospitals.map((h) => <li key={h}>{h}</li>)}
+                </ul>
+              </ContactRow>
             </div>
 
-            <div className="mt-10">
-              <a
-                href="/request-an-appointment"
-                className="inline-block bg-[#253d47] text-white px-8 py-3 rounded-sm font-semibold text-sm uppercase tracking-wider hover:bg-[#2a4a5a] transition-colors"
-              >
-                Request an Appointment
-              </a>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link href="/request-an-appointment" className="inline-flex items-center gap-2 bg-brand text-white px-6 py-3 rounded-sm font-semibold text-sm uppercase tracking-wide hover:bg-brand-light transition-colors">
+                Request an Appointment <ArrowRightIcon className="w-4 h-4" />
+              </Link>
             </div>
           </div>
 
-          {/* Map placeholder — would embed Google Maps in production */}
-          <div className="bg-gray-100 rounded-sm flex items-center justify-center" style={{ minHeight: "400px" }}>
-            <div className="text-center text-gray-400 p-8">
-              <p className="text-4xl mb-3">📍</p>
-              <p className="font-medium text-gray-500">Suite 3, 7 Foot Street</p>
-              <p className="text-sm">Frankston VIC 3199</p>
-              <a
-                href="https://maps.google.com/?q=Suite+3+7+Foot+Street+Frankston+VIC+3199"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-4 text-[#253d47] text-sm hover:underline"
-              >
-                Open in Google Maps →
-              </a>
-            </div>
+          {/* Map — click to load (privacy) */}
+          <div className="rounded-sm overflow-hidden border border-line bg-surface-muted flex items-center justify-center min-h-[400px]">
+            {mapLoaded ? (
+              <iframe
+                title="Dr Brett Marshall practice location"
+                src="https://www.google.com/maps?q=Suite+3,+7+Foot+Street,+Frankston+VIC+3199&output=embed"
+                className="w-full h-[400px]"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            ) : (
+              <div className="text-center p-10">
+                <MapPinIcon className="w-10 h-10 text-brand/40 mx-auto mb-4" />
+                <p className="font-medium text-brand">Suite 3, 7 Foot Street</p>
+                <p className="text-sm text-muted mt-1">Frankston VIC 3199</p>
+                <button
+                  onClick={() => setMapLoaded(true)}
+                  className="mt-6 inline-flex items-center gap-2 bg-brand text-white px-5 py-2.5 rounded-sm text-sm font-semibold hover:bg-brand-light transition-colors"
+                >
+                  Load map
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
