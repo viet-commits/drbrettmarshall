@@ -3,7 +3,11 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
+import { Fraunces, Inter } from "next/font/google";
 import cleanContent from "../data/clean_content.json";
+
+const fraunces = Fraunces({ subsets: ["latin"], weight: ["500", "600"], variable: "--font-display", display: "swap" });
+const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-body", display: "swap" });
 
 const CONDITION_SLUGS = [
   "abnormal-pap-smears-vulval-disorders","adhesions","endometriosis",
@@ -60,10 +64,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Dr Brett Marshall — Specialist Obstetrician & Gynaecologist</title>
         <meta name="description" content="Dr Brett Marshall provides expert gynaecological care on the Mornington Peninsula. Consulting in Frankston, operating at Peninsula Private and Beleura Private Hospitals." />
         <link rel="icon" href="/favicon.ico" />
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
       </Head>
 
-      <div style={{ fontFamily: "'Open Sans', sans-serif" }} className="bg-white text-gray-700 antialiased min-h-screen flex flex-col">
+      <div className={`${fraunces.variable} ${inter.variable} bg-white text-gray-700 antialiased min-h-screen flex flex-col`}>
         
         {/* Top Bar — light bg, dark text, 12px */}
         <div className="bg-white text-[#253d47] text-xs hidden md:block border-b border-gray-100">

@@ -43,7 +43,7 @@ export default function RequestAppointment() {
                   <div className="w-12 h-12 rounded-full bg-[#253d47]/5 flex items-center justify-center flex-shrink-0"><span className="text-xl">📠</span></div>
                   <div>
                     <h3 className="font-semibold text-[#253d47] text-sm uppercase tracking-wide mb-2">Fax</h3>
-                    <p className="text-sm text-gray-600">03 9776 6498</p>
+                    <p className="text-sm text-gray-600">03 9039 5060</p>
                   </div>
                 </div>
 
@@ -70,9 +70,10 @@ export default function RequestAppointment() {
               <div className="bg-[#253d47] text-white p-6 rounded-sm">
                 <h3 className="font-semibold text-sm uppercase tracking-wider mb-3">Operating At</h3>
                 <ul className="text-sm text-white/80 space-y-2">
-                  <li>• Peninsula Private Hospital, Langwarrin</li>
+                  <li>• Peninsula Private Hospital, Frankston</li>
                   <li>• Beleura Private Hospital, Mornington</li>
                   <li>• Royal Women&apos;s Hospital, Melbourne</li>
+                  <li>• Cabrini Hospital, Melbourne</li>
                 </ul>
               </div>
               <div className="bg-gray-50 border border-gray-100 rounded-sm p-6">

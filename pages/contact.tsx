@@ -41,10 +41,18 @@ export default function ContactPage() {
               </div>
 
               <div className="flex gap-4">
+                <div className="text-[#253d47] text-lg flex-shrink-0 mt-0.5">✉️</div>
+                <div>
+                  <h3 className="font-semibold text-[#253d47] mb-1">Email</h3>
+                  <a href="mailto:admin@pengyn.com.au" className="hover:underline">admin@pengyn.com.au</a>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
                 <div className="text-[#253d47] text-lg flex-shrink-0 mt-0.5">📠</div>
                 <div>
                   <h3 className="font-semibold text-[#253d47] mb-1">Fax</h3>
-                  <p>03 9776 6498</p>
+                  <p>03 9039 5060</p>
                 </div>
               </div>
 
@@ -53,9 +61,10 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-semibold text-[#253d47] mb-1">Operating At</h3>
                   <ul className="space-y-1">
-                    <li>Peninsula Private Hospital, Langwarrin</li>
+                    <li>Peninsula Private Hospital, Frankston</li>
                     <li>Beleura Private Hospital, Mornington</li>
                     <li>Royal Women&apos;s Hospital, Melbourne</li>
+                    <li>Cabrini Hospital, Melbourne</li>
                   </ul>
                 </div>
               </div>

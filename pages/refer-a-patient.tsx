@@ -74,7 +74,7 @@ export default function ReferAPatient() {
               <div className="bg-[#253d47] text-white p-6 rounded-sm">
                 <h3 className="font-semibold text-sm uppercase tracking-wider mb-3">Fax Referral</h3>
                 <p className="text-sm text-white/80 mb-1">Alternatively, fax your referral to:</p>
-                <p className="text-lg font-medium">03 9776 6498</p>
+                <p className="text-lg font-medium">03 9039 5060</p>
               </div>
               <div className="bg-gray-50 border border-gray-100 rounded-sm p-6">
                 <h3 className="font-semibold text-[#253d47] text-sm uppercase tracking-wider mb-4">Special Interests</h3>

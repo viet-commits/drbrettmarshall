@@ -47,7 +47,7 @@ export default function AboutPage() {
 
             <div className="text-lg leading-relaxed text-gray-800 space-y-4">
               <p>
-                Dr Brett Marshall has been practising in the Mornington Peninsula area for over 20 years and has appointments at Peninsula Private Hospital, Beleura Private Hospital and Royal Women&apos;s Hospital.
+                Dr Brett Marshall has been practising in the Mornington Peninsula area for over 30 years and has appointments at Peninsula Private Hospital, Beleura Private Hospital and Royal Women&apos;s Hospital.
               </p>
               <p>
                 He graduated from Monash University in 1980 and completed his specialist training in Obstetrics and Gynaecology at Queen Victoria Medical Centre/ Monash Medical Centre/ Peter MacCallum Cancer Institute, achieving the Board of Examiner&apos;s prize for the Membership in 1987. He then continued postgraduate training in the UK.
@@ -89,6 +89,9 @@ export default function AboutPage() {
               </p>
               <p>
                 Brett has a keen interest in professional development and continually keeps up-to-date with the latest technology by attending workshops in endoscopic, incontinence and pelvic reconstructive surgery.
+              </p>
+              <p>
+                Brett has been married for over 40 years and enjoys a busy family life with his wife and three adult children. When he is not working, he also enjoys tennis, sailing and bike-riding.
               </p>
             </div>
           </div>
