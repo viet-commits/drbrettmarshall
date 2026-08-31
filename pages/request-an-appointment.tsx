@@ -53,7 +53,7 @@ export default function RequestAppointment() {
           <aside className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
               <div className="bg-brand text-white p-6 rounded-sm">
-                <h3 className="font-serif text-lg font-semibold mb-4 flex items-center gap-2"><HospitalIcon className="w-5 h-5 text-accent" /> Operating at</h3>
+                <h3 className="font-serif text-lg font-semibold mb-4 flex items-center gap-2"><HospitalIcon className="w-5 h-5 text-accent" /> Operating At</h3>
                 <ul className="space-y-2.5 text-[15px] text-white/85">
                   {hospitals.map((h) => <li key={h} className="flex items-start gap-2"><span className="text-accent">—</span>{h}</li>)}
                 </ul>

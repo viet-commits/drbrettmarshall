@@ -72,7 +72,7 @@ export default function FAQs() {
           <aside className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
               <div className="bg-brand text-white p-6 rounded-sm">
-                <h3 className="font-serif text-lg font-semibold mb-2">Still have questions?</h3>
+                <h3 className="font-serif text-lg font-semibold mb-2">Still Have Questions?</h3>
                 <p className="text-sm text-white/75 mb-5">Contact our practice directly — our staff are happy to help.</p>
                 <a href="tel:+61397766411" className="flex items-center justify-center gap-2 bg-white text-brand px-4 py-3 rounded-sm text-sm font-semibold hover:bg-accent/20 hover:text-white transition-colors">
                   <PhoneIcon className="w-4 h-4" /> 03 9776 6411

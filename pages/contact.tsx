@@ -27,7 +27,7 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact details */}
           <div>
-            <h2 className="font-serif text-2xl font-semibold text-brand mb-8">Get in touch</h2>
+            <h2 className="font-serif text-2xl font-semibold text-brand mb-8">Get In Touch</h2>
             <div className="space-y-7">
               <ContactRow icon={<MapPinIcon className="w-5 h-5" />} label="Address">
                 Suite 3, 7 Foot Street<br />Frankston VIC 3199
@@ -41,7 +41,7 @@ export default function ContactPage() {
               <ContactRow icon={<FaxIcon className="w-5 h-5" />} label="Fax">
                 03 9039 5060
               </ContactRow>
-              <ContactRow icon={<HospitalIcon className="w-5 h-5" />} label="Operating at">
+              <ContactRow icon={<HospitalIcon className="w-5 h-5" />} label="Operating At">
                 <ul className="space-y-1">
                   {hospitals.map((h) => <li key={h}>{h}</li>)}
                 </ul>

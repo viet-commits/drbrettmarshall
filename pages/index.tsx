@@ -1,15 +1,12 @@
 import Head from "next/head";
 import { useCallback, useEffect, useState } from "react";
-import {
-  StethoscopeIcon, HeartPulseIcon, FileTextIcon, CalendarIcon,
-  InfoIcon, ArrowRightIcon, CheckIcon,
-} from "../components/icons";
+import { StethoscopeIcon, FileTextIcon, CalendarIcon, InfoIcon, ArrowRightIcon } from "../components/icons";
 
 const slides = [
-  { image: "/images/surgery-banner-e1547269060618.jpg", eyebrow: "Advanced surgery", text: "Extensive experience in advanced laparoscopic & hysteroscopic surgery" },
-  { image: "/images/incontinence-banner-e1547269083934.jpg", eyebrow: "Pelvic floor care", text: "Holistic and surgical treatment for prolapse & urinary incontinence" },
-  { image: "/images/best-results-banner-e1547269101397.jpg", eyebrow: "Patient-centred", text: "The latest technology, expert knowledge and a caring manner" },
-  { image: "/images/welcome-banner-e1547269304504.jpg", eyebrow: "Women's health", text: "Considerable experience, professional and friendly care" },
+  { image: "/images/surgery-banner-e1547269060618.jpg", text: "Dr Brett Marshall has extensive experience in advanced laparoscopic and hysteroscopic surgery" },
+  { image: "/images/incontinence-banner-e1547269083934.jpg", text: "Offering holistic and surgical treatment options for prolapse and urinary incontinence" },
+  { image: "/images/best-results-banner-e1547269101397.jpg", text: "Using the latest technology, expert knowledge, and a caring manner to deliver the best results for patients" },
+  { image: "/images/welcome-banner-e1547269304504.jpg", text: "Providing considerable experience with professional, friendly care for a range of women's health issues" },
 ];
 
 export default function HomePage() {
@@ -32,7 +29,7 @@ export default function HomePage() {
         <meta name="description" content="Dr Brett Marshall is a specialist obstetrician / gynaecologist based on the Mornington Peninsula, Victoria. He consults at his practice in Frankston, and operates at Peninsula Private Hospital and Beleura Private Hospital." />
       </Head>
 
-      {/* Hero */}
+      {/* Hero slider */}
       <section
         className="relative bg-brand overflow-hidden"
         onMouseEnter={() => setPaused(true)}
@@ -49,28 +46,26 @@ export default function HomePage() {
         ))}
         <div className="absolute inset-0 bg-gradient-to-r from-brand/95 via-brand/75 to-brand/30" />
 
-        <div className="relative z-10 max-w-[1200px] mx-auto px-6 py-20 md:py-32 min-h-[520px] flex items-center">
+        <div className="relative z-10 max-w-[1200px] mx-auto px-6 py-20 md:py-28 min-h-[440px] flex items-center">
           <div className="max-w-2xl">
             {slides.map((s, i) => (
               <div key={i} className={i === current ? "block" : "hidden"}>
-                <p className="text-accent text-sm font-semibold uppercase tracking-[0.2em] mb-4">{s.eyebrow}</p>
-                <h1 className="font-serif text-white text-4xl md:text-5xl font-semibold leading-[1.15] mb-6 text-balance">
+                <h1 className="font-serif text-white text-3xl md:text-[40px] font-semibold leading-[1.2] mb-8">
                   {s.text}
                 </h1>
               </div>
             ))}
             <div className="flex flex-wrap items-center gap-4">
-              <a href="/our-services" className="inline-flex items-center gap-2 bg-white text-brand px-7 py-3.5 rounded-sm font-semibold text-sm uppercase tracking-wide hover:bg-accent/20 hover:text-white transition-colors">
-                Our Services <ArrowRightIcon className="w-4 h-4" />
+              <a href="/our-services" className="inline-flex items-center gap-2 bg-white text-brand px-7 py-3.5 rounded-sm font-semibold text-xs uppercase tracking-[1.2px] hover:bg-accent/20 hover:text-white transition-colors">
+                Read More about our Services <ArrowRightIcon className="w-4 h-4" />
               </a>
-              <a href="/request-an-appointment" className="inline-flex items-center gap-2 border border-white/40 text-white px-7 py-3.5 rounded-sm font-semibold text-sm uppercase tracking-wide hover:bg-white/10 transition-colors">
+              <a href="/request-an-appointment" className="inline-flex items-center gap-2 border border-white/40 text-white px-7 py-3.5 rounded-sm font-semibold text-xs uppercase tracking-[1.2px] hover:bg-white/10 transition-colors">
                 Request Appointment
               </a>
             </div>
           </div>
         </div>
 
-        {/* Dots */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-2">
           {slides.map((_, i) => (
             <button
@@ -84,12 +79,11 @@ export default function HomePage() {
       </section>
 
       {/* Welcome */}
-      <section className="max-w-[1200px] mx-auto px-6 py-20 md:py-28">
-        <div className="text-center mb-14">
-          <p className="text-accent text-sm font-semibold uppercase tracking-[0.2em] mb-3">Welcome</p>
-          <h2 className="font-serif text-3xl md:text-4xl font-semibold text-brand">Specialist obstetric &amp; gynaecological care</h2>
-          <p className="mt-5 text-lg text-muted max-w-2xl mx-auto">Dr Brett Marshall <span className="text-brand font-medium">MBBS FRANZCOG</span> has cared for women on the Mornington Peninsula for over 30 years.</p>
-          <div className="w-16 h-px bg-accent mx-auto mt-6" />
+      <section className="max-w-[1200px] mx-auto px-6 py-20 md:py-24">
+        <div className="text-center mb-12">
+          <div className="w-16 h-px bg-brand mx-auto mb-4" />
+          <h2 className="font-serif text-3xl md:text-4xl font-semibold text-brand">Welcome</h2>
+          <div className="w-10 h-px bg-brand mx-auto mt-4" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
           <div className="text-lg leading-relaxed text-ink/90 space-y-5">
@@ -103,8 +97,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Quick access cards */}
-      <section className="bg-surface-muted py-20">
+      {/* CTA cards */}
+      <section className="bg-surface-muted py-16">
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <CtaCard icon={<FileTextIcon className="w-6 h-6" />} title="Patient Information & Literature" desc="Important information about conditions and operations" href="/patient-information" />
@@ -118,10 +112,8 @@ export default function HomePage() {
       {/* Professional associations */}
       <section className="py-20">
         <div className="max-w-[1200px] mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl font-semibold text-brand">Professional Associations</h2>
-            <div className="w-16 h-px bg-accent mx-auto mt-6" />
-          </div>
+          <h2 className="font-serif text-3xl md:text-4xl font-semibold text-brand text-center mb-2">Professional Associations and Memberships</h2>
+          <div className="w-10 h-px bg-brand mx-auto mb-12" />
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
             {[
               { logo: "/images/ranzcog-uai-258x103.png", name: "RANZCOG" },
@@ -133,20 +125,6 @@ export default function HomePage() {
             ].map((a) => (
               <img key={a.name} src={a.logo} alt={a.name} title={a.name} className="h-14 w-auto object-contain mx-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Closing CTA */}
-      <section className="bg-brand py-16">
-        <div className="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h2 className="font-serif text-2xl md:text-3xl font-semibold text-white">Ready to make an appointment?</h2>
-            <p className="text-white/70 mt-1">A referral from your GP or specialist is required.</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <a href="tel:+61397766411" className="inline-flex items-center gap-2 bg-white text-brand px-6 py-3 rounded-sm font-semibold hover:bg-accent/20 hover:text-white transition-colors">03 9776 6411</a>
-            <a href="/request-an-appointment" className="inline-flex items-center gap-2 border border-white/40 text-white px-6 py-3 rounded-sm font-semibold hover:bg-white/10 transition-colors">Request Appointment <ArrowRightIcon className="w-4 h-4" /></a>
           </div>
         </div>
       </section>
@@ -163,9 +141,6 @@ function CtaCard({ icon, title, desc, href }: { icon: React.ReactNode; title: st
       <div>
         <h3 className="font-serif text-xl font-semibold text-brand mb-1.5">{title}</h3>
         <p className="text-[15px] text-muted leading-relaxed">{desc}</p>
-        <span className="inline-flex items-center gap-1.5 text-sm font-medium text-brand mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
-          Learn more <ArrowRightIcon className="w-4 h-4" />
-        </span>
       </div>
     </a>
   );

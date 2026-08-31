@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { PageHeader, SectionHeading } from "../components/ui";
+import { PageHeader } from "../components/ui";
 
 const associations = [
   { logo: "/images/eshrelogo-uai-258x103.png", name: "European Society of Human Reproduction & Embryology" },
@@ -9,13 +9,6 @@ const associations = [
   { logo: "/images/ASCCP-textlogo-.jpg-uai-258x103.png", name: "Australian Society for Colposcopy and Cervical Pathology" },
   { logo: "/images/ISGE_logo_blauw_440x164-300x112-300x112-uai-258x103.png", name: "International Society for Gynaecological Endoscopy" },
   { logo: "/images/ages-logo-content-uai-258x103.png", name: "Australian Gynaecological Endoscopy Society" },
-];
-
-const milestones = [
-  { year: "1980", text: "Graduated Monash University (MBBS)" },
-  { year: "1987", text: "Membership FRANZCOG — Board of Examiners' prize" },
-  { year: "1989", text: "Subspecialty training with Prof. Christopher Sutton, UK" },
-  { year: "1990", text: "Commenced private practice on the Peninsula" },
 ];
 
 export default function AboutPage() {
@@ -29,29 +22,18 @@ export default function AboutPage() {
       <PageHeader title="About" />
 
       <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* Portrait + credentials */}
-          <div className="md:col-span-1">
-            <div className="md:sticky md:top-24">
-              <img src="/images/dr-marshall.jpg" alt="Dr Brett Marshall" className="w-full rounded-sm shadow-md" />
-              <dl className="mt-6 divide-y divide-line border border-line rounded-sm overflow-hidden">
-                {milestones.map((m) => (
-                  <div key={m.year} className="flex gap-4 px-5 py-3.5 bg-white">
-                    <dt className="font-serif text-brand font-semibold w-14 flex-shrink-0">{m.year}</dt>
-                    <dd className="text-sm text-ink/80 leading-relaxed">{m.text}</dd>
-                  </div>
-                ))}
-              </dl>
-              <Link href="/contact" className="mt-6 flex items-center justify-center gap-2 w-full bg-brand text-white px-6 py-3.5 rounded-sm font-semibold text-sm uppercase tracking-wider hover:bg-brand-light transition-colors">
-                Contact Dr Marshall
-              </Link>
-            </div>
+        {/* Bio */}
+        <div className="flex flex-col md:flex-row gap-10 mb-16">
+          <div className="md:w-1/3 flex-shrink-0">
+            <img src="/images/dr-marshall.jpg" alt="Dr Brett Marshall" className="w-full rounded-sm shadow-md" />
+            <Link href="/contact" className="mt-6 flex items-center justify-center w-full bg-brand text-white px-6 py-3 rounded-sm font-semibold text-sm uppercase tracking-wider hover:bg-brand-light transition-colors">
+              CONTACT
+            </Link>
           </div>
 
-          {/* Bio */}
-          <div className="md:col-span-2">
-            <p className="text-accent text-sm font-semibold uppercase tracking-[0.2em] mb-2">Dr Brett Marshall</p>
-            <h2 className="font-serif text-3xl font-semibold text-brand mb-6">MBBS FRANZCOG — Gynaecologist</h2>
+          <div className="md:w-2/3">
+            <h2 className="font-serif text-3xl font-semibold text-brand mb-6">Dr Brett Marshall</h2>
+            <div className="w-10 h-px bg-brand mb-6" />
 
             <div className="text-lg leading-relaxed text-ink/90 space-y-5">
               <p>Dr Brett Marshall has been practising in the Mornington Peninsula area for over 30 years and has appointments at Peninsula Private Hospital, Beleura Private Hospital and Royal Women&apos;s Hospital.</p>
@@ -69,11 +51,12 @@ export default function AboutPage() {
         </div>
 
         {/* Associations */}
-        <section className="mt-20">
-          <SectionHeading eyebrow="Memberships" title="Professional Associations" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <section>
+          <h2 className="font-serif text-3xl font-semibold text-brand mb-2">Professional Associations and Memberships</h2>
+          <div className="w-10 h-px bg-brand mb-10" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {associations.map((a) => (
-              <div key={a.name} className="flex items-center gap-4 p-5 bg-surface-muted rounded-sm border border-line">
+              <div key={a.name} className="flex items-center gap-3 p-4 bg-surface-muted rounded-sm border border-line">
                 <img src={a.logo} alt={a.name} className="h-10 w-auto object-contain flex-shrink-0 grayscale opacity-80" />
                 <span className="text-xs text-muted leading-tight">{a.name}</span>
               </div>

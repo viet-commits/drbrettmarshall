@@ -80,7 +80,7 @@ export default function ServicePage({ slug }: { slug: string }) {
           <aside className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
               <div className="bg-brand text-white p-6 rounded-sm">
-                <h3 className="font-serif text-lg font-semibold mb-2">Request a consultation</h3>
+                <h3 className="font-serif text-lg font-semibold mb-2">Request a Consultation</h3>
                 <p className="text-sm text-white/75 mb-5">Book an appointment with Dr Brett Marshall to discuss your health concerns.</p>
                 <Link href="/request-an-appointment" className="block text-center bg-white text-brand px-4 py-3 rounded-sm text-sm font-semibold hover:bg-accent/20 hover:text-white transition-colors">
                   Request Appointment
