@@ -1,19 +1,13 @@
 import { useState } from "react";
 import Head from "next/head";
+import Link from "next/link";
+import { PageHeader } from "../components/ui";
+import { ArrowRightIcon } from "../components/icons";
 
 const tabs = [
   { id: "photo", label: "Photo Gallery" },
   { id: "video", label: "Video Gallery" },
 ] as const;
-
-const photoItems = [
-  { caption: "Endometriosis", desc: "Laparoscopic view of endometriosis" },
-  { caption: "Laser Excision Endometriosis", desc: "CO₂ laser excision of endometriosis" },
-  { caption: "Adhesions", desc: "Laparoscopic view of pelvic adhesions" },
-  { caption: "Ovarian Cyst", desc: "Laparoscopic view of ovarian cyst" },
-  { caption: "Fibroids", desc: "Laparoscopic view of uterine fibroids" },
-  { caption: "Hysteroscopy", desc: "Hysteroscopic view of uterine cavity" },
-];
 
 export default function ForDoctors() {
   const [tab, setTab] = useState<string>("photo");
@@ -22,23 +16,28 @@ export default function ForDoctors() {
     <>
       <Head>
         <title>For Doctors — Dr Brett Marshall</title>
-        <meta name="description" content="Photo and video gallery for referring doctors. Dr Brett Marshall — specialist gynaecologist and laparoscopic surgeon." />
+        <meta name="description" content="Referral information and private surgical galleries for referring doctors. Dr Brett Marshall — specialist gynaecologist and laparoscopic surgeon." />
+        <meta name="robots" content="noindex" />
       </Head>
 
-      <div className="bg-gray-50 border-b">
-        <div className="max-w-[1200px] mx-auto px-4 py-8">
-          <h1 className="text-[29px] font-semibold text-[#253d47]">For Doctors</h1>
-          <div className="text-xs text-gray-400 mt-1"><a href="/" className="hover:text-[#253d47]">Home</a> / For Doctors</div>
-        </div>
-      </div>
+      <PageHeader title="For Doctors" />
 
-      <div className="max-w-[1200px] mx-auto px-4 py-12">
-        <div className="flex border-b mb-10">
+      <div className="max-w-[1200px] mx-auto px-6 py-16">
+        <div className="bg-accent/15 border border-accent/40 rounded-sm px-6 py-4 mb-10 flex items-start gap-3">
+          <span className="text-accent font-serif text-xl leading-none mt-0.5">i</span>
+          <p className="text-sm text-ink/85">This area is for referring medical practitioners. Access to the surgical galleries is restricted and requires authorisation.</p>
+        </div>
+
+        <div className="flex gap-1 border-b border-line mb-10" role="tablist">
           {tabs.map((t) => (
             <button
               key={t.id}
               onClick={() => setTab(t.id)}
-              className={`px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-colors ${tab === t.id ? "text-[#253d47] border-b-2 border-[#253d47]" : "text-gray-400 hover:text-gray-600"}`}
+              role="tab"
+              aria-selected={tab === t.id}
+              className={`px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-colors border-b-2 ${
+                tab === t.id ? "text-brand border-brand" : "text-muted border-transparent hover:text-brand"
+              }`}
             >
               {t.label}
             </button>
@@ -46,32 +45,27 @@ export default function ForDoctors() {
         </div>
 
         {tab === "photo" ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {photoItems.map((item, i) => (
-              <div key={i} className="bg-gray-50 border border-gray-100 rounded-sm overflow-hidden group hover:shadow-md transition-all">
-                <div className="aspect-video bg-gray-200 flex items-center justify-center text-gray-400">
-                  <span className="text-4xl">🔬</span>
-                </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-[#253d47] text-sm mb-1">{item.caption}</h3>
-                  <p className="text-xs text-gray-500">{item.desc}</p>
-                </div>
-              </div>
-            ))}
+          <div className="text-center py-16 max-w-xl mx-auto">
+            <p className="font-serif text-2xl font-semibold text-brand mb-3">Surgical photo gallery</p>
+            <p className="text-muted leading-relaxed">Photographic documentation of gynaecological procedures for professional reference. This gallery is restricted to referring doctors and is not publicly accessible.</p>
+            <Link href="/refer-a-patient" className="inline-flex items-center gap-2 mt-8 bg-brand text-white px-6 py-3 rounded-sm font-semibold text-sm uppercase tracking-wide hover:bg-brand-light transition-colors">
+              Refer a Patient <ArrowRightIcon className="w-4 h-4" />
+            </Link>
           </div>
         ) : (
-          <div className="text-center py-16">
-            <p className="text-6xl mb-4">🎬</p>
-            <h3 className="text-lg font-light text-[#253d47] mb-2">Video Gallery</h3>
-            <p className="text-sm text-gray-500 max-w-md mx-auto">Surgical procedure videos are available for referring doctors. Please contact the practice for access.</p>
-            <a href="/refer-a-patient" className="inline-block mt-6 bg-[#253d47] text-white px-6 py-2.5 rounded-sm text-sm font-semibold hover:bg-[#2a4a5a] transition-colors">Refer a Patient</a>
+          <div className="text-center py-16 max-w-xl mx-auto">
+            <p className="font-serif text-2xl font-semibold text-brand mb-3">Surgical video gallery</p>
+            <p className="text-muted leading-relaxed">Surgical procedure videos are available for referring doctors. Please contact the practice for access.</p>
+            <Link href="/refer-a-patient" className="inline-flex items-center gap-2 mt-8 bg-brand text-white px-6 py-3 rounded-sm font-semibold text-sm uppercase tracking-wide hover:bg-brand-light transition-colors">
+              Refer a Patient <ArrowRightIcon className="w-4 h-4" />
+            </Link>
           </div>
         )}
 
         <div className="mt-16 text-center">
-          <a href="/refer-a-patient" className="inline-block bg-[#253d47] text-white px-8 py-3 rounded-sm font-semibold text-sm uppercase tracking-wider hover:bg-[#2a4a5a] transition-colors">
-            Refer a Patient Online
-          </a>
+          <Link href="/refer-a-patient" className="inline-flex items-center gap-2 bg-brand text-white px-8 py-3.5 rounded-sm font-semibold text-sm uppercase tracking-wider hover:bg-brand-light transition-colors">
+            Refer a Patient Online <ArrowRightIcon className="w-4 h-4" />
+          </Link>
         </div>
       </div>
     </>

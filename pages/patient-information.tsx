@@ -1,9 +1,12 @@
 import Head from "next/head";
+import Link from "next/link";
+import { PageHeader, SectionHeading } from "../components/ui";
+import { CalendarIcon, FileTextIcon, InfoIcon, ArrowRightIcon } from "../components/icons";
 
 const ctaCards = [
-  { title: "Request an Appointment", href: "/request-an-appointment", desc: "Phone 03 9776 6411 to book your consultation with Dr Marshall." },
-  { title: "Patient Forms", href: "/patient-forms", desc: "Download and complete patient forms before your visit." },
-  { title: "About Your Visit", href: "/about-your-visit", desc: "What to expect at your first appointment and how to prepare." },
+  { icon: <CalendarIcon className="w-6 h-6" />, title: "Request an Appointment", href: "/request-an-appointment", desc: "Phone 03 9776 6411 to book your consultation with Dr Marshall." },
+  { icon: <FileTextIcon className="w-6 h-6" />, title: "Patient Forms", href: "/patient-forms", desc: "Download and complete patient forms before your visit." },
+  { icon: <InfoIcon className="w-6 h-6" />, title: "About Your Visit", href: "/about-your-visit", desc: "What to expect at your first appointment and how to prepare." },
 ];
 
 const associations = [
@@ -23,34 +26,28 @@ export default function PatientInformation() {
         <meta name="description" content="Patient information, forms, and resources for Dr Brett Marshall's gynaecological practice on the Mornington Peninsula." />
       </Head>
 
-      <div className="bg-gray-50 border-b">
-        <div className="max-w-[1200px] mx-auto px-4 py-8">
-          <h1 className="text-[29px] font-semibold text-[#253d47]">Patient Information</h1>
-          <div className="text-xs text-gray-400 mt-1"><a href="/" className="hover:text-[#253d47]">Home</a> / Patient Information</div>
-        </div>
-      </div>
+      <PageHeader title="Patient Information" />
 
-      <div className="max-w-[1200px] mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+      <div className="max-w-[1200px] mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
           {ctaCards.map((card) => (
-            <a key={card.href} href={card.href} className="block bg-white border border-gray-200 rounded-sm p-8 text-center hover:shadow-lg hover:border-[#253d47]/30 transition-all group">
-              <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-[#253d47]/5 flex items-center justify-center group-hover:bg-[#253d47]/10 transition-colors">
-                <span className="text-[#253d47] text-2xl font-light">+</span>
+            <Link key={card.href} href={card.href} className="group bg-white border border-line rounded-sm p-8 text-center hover:shadow-lg hover:border-brand/20 hover:-translate-y-0.5 transition-all">
+              <div className="w-14 h-14 mx-auto mb-5 rounded-sm bg-brand/5 flex items-center justify-center text-brand group-hover:bg-brand group-hover:text-white transition-colors">
+                {card.icon}
               </div>
-              <h2 className="font-semibold text-[#253d47] text-lg mb-3">{card.title}</h2>
-              <p className="text-sm text-gray-500 leading-relaxed">{card.desc}</p>
-            </a>
+              <h2 className="font-serif text-xl font-semibold text-brand mb-3">{card.title}</h2>
+              <p className="text-[15px] text-muted leading-relaxed">{card.desc}</p>
+            </Link>
           ))}
         </div>
 
         <section>
-          <h2 className="text-[29px] font-semibold text-[#253d47] mb-2">Professional Associations and Memberships</h2>
-          <div className="w-10 h-px bg-[#253d47] mb-10" />
+          <SectionHeading eyebrow="Memberships" title="Professional Associations" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {associations.map((assoc) => (
-              <div key={assoc.name} className="flex items-center gap-4 p-4 bg-gray-50 rounded-sm border border-gray-100">
-                <img src={assoc.logo} alt={assoc.name} className="h-10 w-auto object-contain flex-shrink-0" />
-                <span className="text-xs text-gray-600 leading-tight">{assoc.name}</span>
+            {associations.map((a) => (
+              <div key={a.name} className="flex items-center gap-4 p-5 bg-surface-muted rounded-sm border border-line">
+                <img src={a.logo} alt={a.name} className="h-10 w-auto object-contain flex-shrink-0 grayscale opacity-80" />
+                <span className="text-xs text-muted leading-tight">{a.name}</span>
               </div>
             ))}
           </div>

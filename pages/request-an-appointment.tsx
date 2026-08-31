@@ -1,4 +1,14 @@
 import Head from "next/head";
+import Link from "next/link";
+import { PageHeader, ContactRow } from "../components/ui";
+import { PhoneIcon, FaxIcon, MapPinIcon, InfoIcon, HospitalIcon, ArrowRightIcon } from "../components/icons";
+
+const hospitals = [
+  "Peninsula Private Hospital, Frankston",
+  "Beleura Private Hospital, Mornington",
+  "Royal Women's Hospital, Melbourne",
+  "Cabrini Hospital, Melbourne",
+];
 
 export default function RequestAppointment() {
   return (
@@ -8,58 +18,33 @@ export default function RequestAppointment() {
         <meta name="description" content="Request an appointment with Dr Brett Marshall — specialist gynaecologist on the Mornington Peninsula. Phone 03 9776 6411." />
       </Head>
 
-      <div className="bg-gray-50 border-b">
-        <div className="max-w-[1200px] mx-auto px-4 py-8">
-          <h1 className="text-[29px] font-semibold text-[#253d47]">Request an Appointment</h1>
-          <div className="text-xs text-gray-400 mt-1"><a href="/" className="hover:text-[#253d47]">Home</a> / Request an Appointment</div>
-        </div>
-      </div>
+      <PageHeader title="Request an Appointment" />
 
-      <div className="max-w-[1200px] mx-auto px-4 py-12">
+      <div className="max-w-[1200px] mx-auto px-6 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
-            <div className="bg-white border border-gray-200 rounded-sm p-8 md:p-12">
-              <h2 className="text-xl font-light text-[#253d47] mb-8">Contact Information</h2>
-
-              <div className="space-y-8">
-                <div className="flex gap-5">
-                  <div className="w-12 h-12 rounded-full bg-[#253d47]/5 flex items-center justify-center flex-shrink-0"><span className="text-xl">📍</span></div>
-                  <div>
-                    <h3 className="font-semibold text-[#253d47] text-sm uppercase tracking-wide mb-2">Address</h3>
-                    <p className="text-sm text-gray-600">Suite 3, 7 Foot Street<br />Frankston VIC 3199</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-5">
-                  <div className="w-12 h-12 rounded-full bg-[#253d47]/5 flex items-center justify-center flex-shrink-0"><span className="text-xl">📞</span></div>
-                  <div>
-                    <h3 className="font-semibold text-[#253d47] text-sm uppercase tracking-wide mb-2">Phone</h3>
-                    <a href="tel:+613****6411" className="text-lg text-[#253d47] hover:underline font-medium">03 9776 6411</a>
-                    <p className="text-sm text-gray-500 mt-1">For all appointments and enquiries</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-5">
-                  <div className="w-12 h-12 rounded-full bg-[#253d47]/5 flex items-center justify-center flex-shrink-0"><span className="text-xl">📠</span></div>
-                  <div>
-                    <h3 className="font-semibold text-[#253d47] text-sm uppercase tracking-wide mb-2">Fax</h3>
-                    <p className="text-sm text-gray-600">03 9039 5060</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-5">
-                  <div className="w-12 h-12 rounded-full bg-[#253d47]/5 flex items-center justify-center flex-shrink-0"><span className="text-xl">ℹ️</span></div>
-                  <div>
-                    <h3 className="font-semibold text-[#253d47] text-sm uppercase tracking-wide mb-2">Referral Required</h3>
-                    <p className="text-sm text-gray-600">A referral from your GP or specialist is required prior to making an appointment. Patients may phone to book with Marion, who has worked with Dr Marshall for over 20 years and has a nursing background.</p>
-                  </div>
-                </div>
+            <div className="bg-white border border-line rounded-sm p-8 md:p-12">
+              <h2 className="font-serif text-2xl font-semibold text-brand mb-8">Contact information</h2>
+              <div className="space-y-7">
+                <ContactRow icon={<MapPinIcon className="w-5 h-5" />} label="Address">
+                  Suite 3, 7 Foot Street<br />Frankston VIC 3199
+                </ContactRow>
+                <ContactRow icon={<PhoneIcon className="w-5 h-5" />} label="Phone">
+                  <a href="tel:+61397766411" className="text-brand font-medium hover:underline">03 9776 6411</a>
+                  <p className="text-sm text-muted mt-0.5">For all appointments and enquiries</p>
+                </ContactRow>
+                <ContactRow icon={<FaxIcon className="w-5 h-5" />} label="Fax">
+                  03 9039 5060
+                </ContactRow>
+                <ContactRow icon={<InfoIcon className="w-5 h-5" />} label="Referral Required">
+                  A referral from your GP or specialist is required prior to making an appointment. Patients may phone to book with Marion, who has worked with Dr Marshall for over 20 years and has a nursing background.
+                </ContactRow>
               </div>
 
-              <div className="mt-10 p-6 bg-[#253d47]/5 rounded-sm border border-[#253d47]/10">
-                <p className="text-sm text-gray-600">
+              <div className="mt-10 p-6 bg-brand/5 rounded-sm border border-brand/10">
+                <p className="text-[15px] text-ink/85 leading-relaxed">
                   Before your first appointment, we will send you an information pack which includes a new patient form. You can also{" "}
-                  <a href="/patient-forms/new-patient-form" className="text-[#253d47] font-semibold hover:underline">complete the new patient form online here</a>.
+                  <Link href="/patient-forms/new-patient-form" className="text-brand font-semibold hover:underline">complete the new patient form online here</Link>.
                 </p>
               </div>
             </div>
@@ -67,22 +52,19 @@ export default function RequestAppointment() {
 
           <aside className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
-              <div className="bg-[#253d47] text-white p-6 rounded-sm">
-                <h3 className="font-semibold text-sm uppercase tracking-wider mb-3">Operating At</h3>
-                <ul className="text-sm text-white/80 space-y-2">
-                  <li>• Peninsula Private Hospital, Frankston</li>
-                  <li>• Beleura Private Hospital, Mornington</li>
-                  <li>• Royal Women&apos;s Hospital, Melbourne</li>
-                  <li>• Cabrini Hospital, Melbourne</li>
+              <div className="bg-brand text-white p-6 rounded-sm">
+                <h3 className="font-serif text-lg font-semibold mb-4 flex items-center gap-2"><HospitalIcon className="w-5 h-5 text-accent" /> Operating at</h3>
+                <ul className="space-y-2.5 text-[15px] text-white/85">
+                  {hospitals.map((h) => <li key={h} className="flex items-start gap-2"><span className="text-accent">—</span>{h}</li>)}
                 </ul>
               </div>
-              <div className="bg-gray-50 border border-gray-100 rounded-sm p-6">
-                <h3 className="font-semibold text-[#253d47] text-sm uppercase tracking-wider mb-4">Quick Links</h3>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="/about-your-visit" className="text-gray-600 hover:text-[#253d47]">About Your Visit</a></li>
-                  <li><a href="/patient-forms" className="text-gray-600 hover:text-[#253d47]">Patient Forms</a></li>
-                  <li><a href="/frequently-asked-questions-faq" className="text-gray-600 hover:text-[#253d47]">FAQs</a></li>
-                  <li><a href="/contact" className="text-gray-600 hover:text-[#253d47]">Contact & Map</a></li>
+              <div className="bg-surface-muted border border-line rounded-sm p-6">
+                <h3 className="font-serif text-lg font-semibold text-brand mb-4">Quick Links</h3>
+                <ul className="space-y-2 text-[15px]">
+                  <li><Link href="/about-your-visit" className="text-ink/75 hover:text-brand">About Your Visit</Link></li>
+                  <li><Link href="/patient-forms" className="text-ink/75 hover:text-brand">Patient Forms</Link></li>
+                  <li><Link href="/frequently-asked-questions-faq" className="text-ink/75 hover:text-brand">FAQs</Link></li>
+                  <li><Link href="/contact" className="text-ink/75 hover:text-brand">Contact & Map</Link></li>
                 </ul>
               </div>
             </div>
