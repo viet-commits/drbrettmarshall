@@ -12,13 +12,6 @@ const slides = [
   { image: "/images/welcome-banner-e1547269304504.jpg", eyebrow: "Women's health", text: "Considerable experience, professional and friendly care" },
 ];
 
-const stats = [
-  { value: "30+", label: "Years' experience" },
-  { value: "7,000+", label: "Babies delivered" },
-  { value: "5,000+", label: "Operative laparoscopies" },
-  { value: "FRANZCOG", label: "Sub-specialist" },
-];
-
 export default function HomePage() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -90,23 +83,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Credibility strip */}
-      <section className="border-b border-line bg-surface-muted">
-        <div className="max-w-[1200px] mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {stats.map((s) => (
-            <div key={s.label} className="text-center">
-              <div className="font-serif text-3xl md:text-4xl font-semibold text-brand">{s.value}</div>
-              <div className="text-xs uppercase tracking-wider text-muted mt-1">{s.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Welcome */}
       <section className="max-w-[1200px] mx-auto px-6 py-20 md:py-28">
         <div className="text-center mb-14">
           <p className="text-accent text-sm font-semibold uppercase tracking-[0.2em] mb-3">Welcome</p>
-          <h2 className="font-serif text-3xl md:text-4xl font-semibold text-brand">Specialist care, delivered with intent</h2>
+          <h2 className="font-serif text-3xl md:text-4xl font-semibold text-brand">Specialist obstetric &amp; gynaecological care</h2>
+          <p className="mt-5 text-lg text-muted max-w-2xl mx-auto">Dr Brett Marshall <span className="text-brand font-medium">MBBS FRANZCOG</span> has cared for women on the Mornington Peninsula for over 30 years.</p>
           <div className="w-16 h-px bg-accent mx-auto mt-6" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
