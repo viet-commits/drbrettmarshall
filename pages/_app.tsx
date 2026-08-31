@@ -150,12 +150,8 @@ export default function App({ Component, pageProps }: AppProps) {
         {/* Header */}
         <header className={`bg-white sticky top-0 z-50 transition-shadow ${scrolled ? "shadow-md" : "border-b border-line"}`}>
           <div className="max-w-[1200px] mx-auto flex items-center justify-between px-6">
-            <Link href="/" className="flex items-center gap-3 py-3 flex-shrink-0">
-              <img src="/images/DBM_Logo.png" alt="Dr Brett Marshall" className="h-12 w-auto" />
-              <span className="leading-tight">
-                <span className="block font-serif text-lg font-semibold text-brand">Dr Brett Marshall</span>
-                <span className="block text-[11px] uppercase tracking-widest text-muted">MBBS FRANZCOG</span>
-              </span>
+            <Link href="/" className="py-2.5 flex-shrink-0" aria-label="Dr Brett Marshall — home">
+              <img src="/images/DBM_Logo.png" alt="Dr Brett Marshall — Specialist Obstetrician & Gynaecologist" className="h-14 w-auto" />
             </Link>
 
             <nav className="hidden lg:flex items-center">
