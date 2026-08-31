@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Fraunces, Inter } from "next/font/google";
 import cleanContent from "../data/clean_content.json";
 
-const fraunces = Fraunces({ subsets: ["latin"], weight: ["500", "600"], variable: "--font-display", display: "swap" });
+const fraunces = Fraunces({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-display", display: "swap" });
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-body", display: "swap" });
 
 const CONDITION_SLUGS = [
