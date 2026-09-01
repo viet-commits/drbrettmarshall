@@ -10,21 +10,23 @@
   --color-surface-muted: #f6f7f7;
   --color-line: #e5e9ea;
 
-  /* Fonts — --font-display and --font-body are set at runtime by next/font */
-  --font-sans: var(--font-body, ui-sans-serif, system-ui, -apple-system, sans-serif);
-  --font-serif: var(--font-display, ui-serif, Georgia, serif);
+  /* Fonts — Spectral (display serif) + Inter (body sans), self-hosted by next/font.
+     The literal family names are used here (not next/font CSS variables) so the
+     tokens resolve correctly at :root/body scope. */
+  --font-sans: "Inter", "Inter Fallback", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: "Spectral", "Spectral Fallback", ui-serif, Georgia, serif;
 }
 
 body {
   background: #ffffff;
   color: var(--color-ink);
-  font-family: var(--font-body, ui-sans-serif, system-ui, -apple-system, sans-serif);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display, ui-serif, Georgia, serif);
+  font-family: var(--font-serif);
 }
 
 ::selection {

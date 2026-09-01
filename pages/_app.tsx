@@ -3,11 +3,11 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Lora, Inter } from "next/font/google";
+import { Spectral, Inter } from "next/font/google";
 import cleanContent from "../data/clean_content.json";
 import { PhoneIcon, MapPinIcon, ChevronDownIcon, MenuIcon, XIcon, ArrowRightIcon } from "../components/icons";
 
-const lora = Lora({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-display", display: "swap" });
+const spectral = Spectral({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-display", display: "swap" });
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-body", display: "swap" });
 
 const CONDITION_SLUGS = [
@@ -114,7 +114,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={`${lora.variable} ${inter.variable} bg-white text-ink antialiased min-h-screen flex flex-col`}>
+      <div className={`${spectral.variable} ${inter.variable} bg-white text-ink antialiased min-h-screen flex flex-col`}>
         {/* Top bar */}
         <div className="bg-brand text-white/90 text-xs hidden md:block">
           <div className="max-w-[1200px] mx-auto flex items-center px-6 py-2 gap-6">
