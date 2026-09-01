@@ -2,7 +2,21 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { PhoneIcon, ArrowRightIcon } from "../../components/icons";
-import { services, parseSections, findRelated, type ServiceData } from "../../lib/services";
+import {
+  services,
+  CONDITION_SLUGS,
+  PROCEDURE_SLUGS,
+  parseSections,
+  findRelated,
+  type ServiceData,
+} from "../../lib/services";
+
+function sortedTitles(slugs: string[], exclude: string): Array<[string, string]> {
+  return slugs
+    .filter((s) => services[s] && s !== exclude)
+    .map((s) => [s, (services[s] as ServiceData).title] as [string, string])
+    .sort((a, b) => a[1].localeCompare(b[1]));
+}
 
 export default function ServicePage({ slug }: { slug: string }) {
   const svc = services[slug];
@@ -16,11 +30,8 @@ export default function ServicePage({ slug }: { slug: string }) {
 
   const { description, treatment } = parseSections(svc.content, svc.title);
   const related = findRelated(slug, svc.content);
-
-  const allServices = Object.entries(services)
-    .map(([s, d]) => [s, (d as ServiceData).title] as [string, string])
-    .sort((a, b) => a[1].localeCompare(b[1]))
-    .filter(([s]) => s !== slug);
+  const conditions = sortedTitles(CONDITION_SLUGS, slug);
+  const procedures = sortedTitles(PROCEDURE_SLUGS, slug);
 
   return (
     <>
@@ -62,8 +73,8 @@ export default function ServicePage({ slug }: { slug: string }) {
             )}
 
             {related.length > 0 && (
-              <section>
-                <h2 className="text-xs font-semibold uppercase tracking-wider text-muted mb-1">Related</h2>
+              <section className="mb-12">
+                <h2 className="text-xs font-semibold uppercase tracking-wider text-muted mb-1">Related Literature</h2>
                 <div className="w-10 h-px bg-accent mb-6" />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {related.map(([s, title]) => (
@@ -75,6 +86,40 @@ export default function ServicePage({ slug }: { slug: string }) {
                 </div>
               </section>
             )}
+
+            {/* Cross-navigation: conditions vs procedures (restores the WP
+                "Services > By Conditions" / "View Services by Treatment or
+                Procedure" grids that were carried over as dead text). */}
+            <section className="border-t border-line pt-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+                <div>
+                  <h2 className="text-xs font-semibold uppercase tracking-wider text-muted mb-4">Services &gt; By Condition</h2>
+                  <ul className="space-y-2">
+                    {conditions.map(([s, title]) => (
+                      <li key={s}>
+                        <Link href={`/services/${s}`} className="inline-flex items-center gap-1.5 text-[15px] text-ink/80 hover:text-brand group">
+                          <ArrowRightIcon className="w-3.5 h-3.5 text-accent" />
+                          <span className="group-hover:underline">{title}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h2 className="text-xs font-semibold uppercase tracking-wider text-muted mb-4">View Services by Treatment or Procedure</h2>
+                  <ul className="space-y-2">
+                    {procedures.map(([s, title]) => (
+                      <li key={s}>
+                        <Link href={`/services/${s}`} className="inline-flex items-center gap-1.5 text-[15px] text-ink/80 hover:text-brand group">
+                          <ArrowRightIcon className="w-3.5 h-3.5 text-accent" />
+                          <span className="group-hover:underline">{title}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </section>
           </div>
 
           <aside className="lg:col-span-1">
@@ -92,15 +137,30 @@ export default function ServicePage({ slug }: { slug: string }) {
               </div>
 
               <div className="bg-surface-muted border border-line rounded-sm p-6">
-                <h3 className="font-serif text-lg font-semibold text-brand mb-4">All Services</h3>
-                <ul className="space-y-1">
-                  {allServices.map(([s, title]) => (
-                    <li key={s}>
-                      <Link href={`/services/${s}`} className="block text-sm text-ink/75 hover:text-brand py-1 hover:underline">{title}</Link>
-                    </li>
-                  ))}
-                </ul>
-                <Link href="/our-services" className="inline-flex items-center gap-1.5 mt-4 text-xs font-semibold text-brand hover:underline">
+                <h3 className="font-serif text-lg font-semibold text-brand mb-4">Services</h3>
+                <div className="space-y-5">
+                  <div>
+                    <h4 className="text-xs font-semibold uppercase tracking-wider text-muted mb-2">By Condition</h4>
+                    <ul className="space-y-1">
+                      {conditions.map(([s, title]) => (
+                        <li key={s}>
+                          <Link href={`/services/${s}`} className="block text-sm text-ink/75 hover:text-brand py-1 hover:underline">{title}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-semibold uppercase tracking-wider text-muted mb-2">By Procedure or Treatment</h4>
+                    <ul className="space-y-1">
+                      {procedures.map(([s, title]) => (
+                        <li key={s}>
+                          <Link href={`/services/${s}`} className="block text-sm text-ink/75 hover:text-brand py-1 hover:underline">{title}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <Link href="/our-services" className="inline-flex items-center gap-1.5 mt-5 text-xs font-semibold text-brand hover:underline">
                   View all services <ArrowRightIcon className="w-3.5 h-3.5" />
                 </Link>
               </div>

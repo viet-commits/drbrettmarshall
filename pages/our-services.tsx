@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { PageHeader } from "../components/ui";
@@ -9,6 +9,11 @@ type Tab = "conditions" | "procedures";
 
 export default function OurServices() {
   const [tab, setTab] = useState<Tab>("conditions");
+
+  // Support the "Procedures and Treatments" nav link (/#treatments).
+  useEffect(() => {
+    if (window.location.hash === "#treatments") setTab("procedures");
+  }, []);
 
   const conditions = CONDITION_SLUGS
     .filter((s) => services[s])
@@ -37,7 +42,7 @@ export default function OurServices() {
           <p>When Dr Marshall&apos;s secretary, Marion, books you for any surgery, she will also go through some important checklists. Marion has worked with Brett for more than 20 years and has considerable experience in managing patient enquiries. She has a nursing background and understands the range of issues that may present. Marion will help you with any concerns or questions along the way.</p>
         </div>
 
-        <div className="flex gap-1 border-b border-line mb-10" role="tablist">
+        <div className="flex gap-1 border-b border-line mb-10" role="tablist" id="treatments">
           <TabButton active={tab === "conditions"} onClick={() => setTab("conditions")}>By Condition</TabButton>
           <TabButton active={tab === "procedures"} onClick={() => setTab("procedures")}>By Procedure or Treatment</TabButton>
         </div>
