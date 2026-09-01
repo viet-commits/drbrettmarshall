@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build --webpack",
+    "postbuild": "python3 scripts/check-wp-chrome.py",
     "start": "next start",
     "lint": "eslint"
   },
